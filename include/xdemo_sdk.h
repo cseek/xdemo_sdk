@@ -2,24 +2,38 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-05-24 16:01:27
- * @Description: 
- * Copyright (c) 2025 by Aurson, All Rights Reserved. 
+ * @LastEditTime: 2025-05-30 13:21:54
+ * @Description: SDK 的 C++ 语言接口头文件
+ * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #ifndef __XDEMO_SDK_H__
 #define __XDEMO_SDK_H__
 
-#include "common.h" 
+#include "common.h"
+#include <memory>
+#include <string>
+#include <functional>
 
-#ifdef __cplusplus
-extern "C"
+class XDEMO_SDK_API XDemoSDK
 {
-#endif
+public:
+    using OutputCallback = std::function<void(const Output &output)>;
 
-    XDEMO_SDK_API int num_add(int a, int b);
-    XDEMO_SDK_API int num_div(int a, int b);
+public:
+    XDemoSDK(const XDemoSDK &) = delete;
+    XDemoSDK &operator=(const XDemoSDK &) = delete;
+    XDemoSDK();
+    ~XDemoSDK();
 
-#ifdef __cplusplus
-}
-#endif
+public:
+    ResCode init(DataSource data_source);
+    ResCode deinit();
+    ResCode set_output_callback(const XDemoSDK::OutputCallback &output_callback);
+    ResCode input_data(const Input &input);
+
+private:
+    class XDemoSDKImpl;
+    std::unique_ptr<XDemoSDKImpl> m_impl;
+};
+
 #endif // __XDEMO_SDK_H__

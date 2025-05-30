@@ -1,0 +1,18 @@
+#include "doctest.h"
+#include "xlogger.h"
+#include <string>
+#include <cstring>
+
+TEST_SUITE("test_logger")
+{
+    TEST_CASE("test_logger::multiple_logger")
+    {
+        Xlogger logger1, logger2;
+        bool init1 = logger1.init("logger1", "/tmp/logger1.log", "[%Y-%m-%d %H:%M:%S.%f] [%^%L%$] %v", 4, 1024 * 1024 * 6, spdlog::level::debug, spdlog::level::warn);
+        CHECK(init1 == true);
+        bool init2 = logger2.init("logger2", "/tmp/logger2.log", "[%Y-%m-%d %H:%M:%S.%f] [%^%L%$] %v", 4, 1024 * 1024 * 6, spdlog::level::debug, spdlog::level::warn);
+        CHECK(init2 == true);
+        std::remove("/tmp/logger1.log");
+        std::remove("/tmp/logger2.log");
+    }
+}

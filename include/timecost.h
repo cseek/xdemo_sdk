@@ -3,8 +3,8 @@
  * @Date: 2025-05-24 14:37:10
  * @LastEditors: aurson jassimxiong@gmail.com
  * @LastEditTime: 2025-05-24 15:42:32
- * @Description: 
- * Copyright (c) 2025 by Aurson, All Rights Reserved. 
+ * @Description:
+ * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #ifndef __TIME_COST_H__
 #define __TIME_COST_H__
