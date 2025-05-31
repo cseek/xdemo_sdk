@@ -32,13 +32,20 @@
       </tr> 
       <xsl:for-each select="doctest/TestSuite"> 
         <xsl:variable name="testSuite" select="@name"/> 
+        <!-- 计算当前测试套件的总行数 -->
+        <xsl:variable name="totalRows" select="count(TestCase/Expression) + count(TestCase[not(Expression)])"/> 
         <xsl:for-each select="TestCase"> 
           <xsl:variable name="testCase" select="@name"/> 
           <xsl:choose> 
             <xsl:when test="Expression"> 
               <xsl:for-each select="Expression"> 
                 <tr> 
-                  <td><xsl:value-of select="$testSuite"/></td> 
+                  <!-- 仅在第一行输出测试套件名称并设置rowspan -->
+                  <xsl:if test="position() = 1 and count(../preceding-sibling::TestCase) = 0"> 
+                    <td rowspan="{$totalRows}"> 
+                      <xsl:value-of select="$testSuite"/> 
+                    </td> 
+                  </xsl:if> 
                   <td><xsl:value-of select="$testCase"/></td> 
                   <td><xsl:value-of select="Original"/></td> 
                   <td class="{@success}"><xsl:value-of select="@success"/></td> 
@@ -47,7 +54,12 @@
             </xsl:when> 
             <xsl:otherwise> 
               <tr> 
-                <td><xsl:value-of select="$testSuite"/></td> 
+                <!-- 仅在第一行输出测试套件名称并设置rowspan -->
+                <xsl:if test="count(preceding-sibling::TestCase) = 0"> 
+                  <td rowspan="{$totalRows}"> 
+                    <xsl:value-of select="$testSuite"/> 
+                  </td> 
+                </xsl:if> 
                 <td><xsl:value-of select="$testCase"/></td> 
                 <td>N/A</td> 
                 <td class="true">true</td> 
