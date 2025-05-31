@@ -131,12 +131,12 @@
         
         <div class="summary-item">
           <p><span class="stats-label">成功用例：</span></p>
-          <p class="stats-value" style="color:#388e3c">✅ <xsl:value-of select="doctest/OverallResultsTestCases/@successes"/></p>
+          <p class="stats-value"> <xsl:value-of select="doctest/OverallResultsTestCases/@successes"/></p>
         </div>
         
         <div class="summary-item">
           <p><span class="stats-label">失败用例：</span></p>
-          <p class="stats-value" style="color:#d32f2f">❌ <xsl:value-of select="doctest/OverallResultsTestCases/@failures"/></p>
+          <p class="stats-value" style="color:#d32f2f"> <xsl:value-of select="doctest/OverallResultsTestCases/@failures"/></p>
         </div>
       </div>
       
@@ -145,12 +145,12 @@
         <div class="summary-grid">
           <div class="summary-item">
             <p><span class="stats-label">成功断言：</span></p>
-            <p class="stats-value" style="color:#388e3c">✅ <xsl:value-of select="doctest/OverallResultsAsserts/@successes"/></p>
+            <p class="stats-value"> <xsl:value-of select="doctest/OverallResultsAsserts/@successes"/></p>
           </div>
           
           <div class="summary-item">
             <p><span class="stats-label">失败断言：</span></p>
-            <p class="stats-value" style="color:#d32f2f">❌ <xsl:value-of select="doctest/OverallResultsAsserts/@failures"/></p>
+            <p class="stats-value" style="color:#d32f2f"> <xsl:value-of select="doctest/OverallResultsAsserts/@failures"/></p>
           </div>
           
           <div class="summary-item">

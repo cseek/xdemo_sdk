@@ -2,17 +2,17 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-29 15:37:02
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-05-30 13:18:17
- * @Description: 
- * Copyright (c) 2025 by Aurson, All Rights Reserved. 
+ * @LastEditTime: 2025-05-31 22:29:56
+ * @Description:
+ * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #include "xdemo_sdkc.h"
 #include "xdemo_sdk.h"
 #include "singleton.h"
 
-XDEMO_SDK_API ResCode init(DataSource data_source)
+XDEMO_SDK_API ResCode init(DataSource data_source, const LogConfig *log_config)
 {
-    return Singleton<XDemoSDK>::instance().init(data_source);
+    return Singleton<XDemoSDK>::instance().init(data_source, *log_config);
 }
 
 XDEMO_SDK_API ResCode deinit()

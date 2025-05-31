@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-29 13:30:15
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-05-29 22:33:50
+ * @LastEditTime: 2025-05-31 22:27:59
  * @Description: sdk 的 C 语言接口头文件
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -22,7 +22,7 @@ extern "C"
      * @param {DataSource} data_source，INTERNAL: 内部数据源，EXTERNAL: 外部数据源
      * @return {ResCode} 返回码
      */    
-    XDEMO_SDK_API ResCode init(DataSource data_source);
+    XDEMO_SDK_API ResCode init(DataSource data_source, const LogConfig *log_config);
 
     /**
      * @description: 反初始化 SDK

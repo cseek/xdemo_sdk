@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-05-30 13:29:32
+ * @LastEditTime: 2025-05-31 22:08:25
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -16,7 +16,7 @@ public:
     XDemoSDKImpl() = default;
     ~XDemoSDKImpl() = default;
 
-    ResCode init(DataSource data_source)
+    ResCode init(DataSource data_source, const LogConfig &log_config)
     {
         return SUCCESS;
     }
@@ -60,11 +60,11 @@ XDemoSDK::~XDemoSDK()
 {
 }
 
-ResCode XDemoSDK::init(DataSource data_source)
+ResCode XDemoSDK::init(DataSource data_source, const LogConfig &log_config)
 {
     if (m_impl)
     {
-        return m_impl->init(data_source);
+        return m_impl->init(data_source, log_config);
     }
     return ERROR_NOT_INITIALIZED;
 }
