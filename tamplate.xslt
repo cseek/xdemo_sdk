@@ -3,25 +3,53 @@
   <html> 
   <head> 
     <style> 
+      body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        margin: 20px; 
+      }
       table {  
         border-collapse: collapse;  
         width: 100%; 
+        margin-top: 15px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       } 
       th, td {  
-        border: 1px solid lightgray;  
-        padding: 8px;  
+        border: 1px solid #e0e0e0;  
+        padding: 10px 12px;  
         text-align: left; 
       } 
-      .false { color: red; } 
-      .true { color: green; } 
-      .header { 
-        background-color: lightgray; 
-        font-weight: bold; 
+      .false { 
+        color: #d32f2f; 
+        font-weight: bold;
       } 
+      .true { 
+        color: #388e3c; 
+        font-weight: bold;
+      } 
+      .header { 
+        background-color: #c8e6c9; /* 浅绿色背景 */
+        color: #2e7d32; /* 深绿色文字 */
+        font-weight: bold; 
+        text-align: center;
+      } 
+      h2 {
+        color: #2e7d32;
+        border-bottom: 2px solid #c8e6c9;
+        padding-bottom: 5px;
+      }
+      .summary {
+        background-color: #f1f8e9;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+      .summary p {
+        margin: 5px 0;
+      }
     </style> 
   </head> 
   <body> 
-    <h2>单元测试报告</h2> 
+    <h2>📝 单元测试报告</h2> 
     <h3>问题反馈: jassimxiong@gmail.com</h3> 
     <table> 
       <tr class="header"> 
@@ -32,7 +60,6 @@
       </tr> 
       <xsl:for-each select="doctest/TestSuite"> 
         <xsl:variable name="testSuite" select="@name"/> 
-        <!-- 计算当前测试套件的总行数 -->
         <xsl:variable name="totalRows" select="count(TestCase/Expression) + count(TestCase[not(Expression)])"/> 
         <xsl:for-each select="TestCase"> 
           <xsl:variable name="testCase" select="@name"/> 
@@ -40,9 +67,8 @@
             <xsl:when test="Expression"> 
               <xsl:for-each select="Expression"> 
                 <tr> 
-                  <!-- 仅在第一行输出测试套件名称并设置rowspan -->
                   <xsl:if test="position() = 1 and count(../preceding-sibling::TestCase) = 0"> 
-                    <td rowspan="{$totalRows}"> 
+                    <td rowspan="{$totalRows}" style="background-color:#f1f8e9; vertical-align:middle; font-weight:bold;"> 
                       <xsl:value-of select="$testSuite"/> 
                     </td> 
                   </xsl:if> 
@@ -54,9 +80,8 @@
             </xsl:when> 
             <xsl:otherwise> 
               <tr> 
-                <!-- 仅在第一行输出测试套件名称并设置rowspan -->
                 <xsl:if test="count(preceding-sibling::TestCase) = 0"> 
-                  <td rowspan="{$totalRows}"> 
+                  <td rowspan="{$totalRows}" style="background-color:#f1f8e9; vertical-align:middle; font-weight:bold;"> 
                     <xsl:value-of select="$testSuite"/> 
                   </td> 
                 </xsl:if> 
@@ -69,11 +94,14 @@
         </xsl:for-each> 
       </xsl:for-each> 
     </table> 
-    <h2>汇总:</h2> 
-    <p>成功用例总计: <xsl:value-of select="doctest/OverallResultsTestCases/@successes"/></p> 
-    <p>失败用例总计: <xsl:value-of select="doctest/OverallResultsTestCases/@failures"/></p> 
-    <p>成功断言总计: <xsl:value-of select="doctest/OverallResultsAsserts/@successes"/></p> 
-    <p>失败断言总计: <xsl:value-of select="doctest/OverallResultsAsserts/@failures"/></p> 
+    
+    <div class="summary">
+      <h2>📊 测试汇总</h2> 
+      <p>✅ 成功用例总计: <xsl:value-of select="doctest/OverallResultsTestCases/@successes"/></p> 
+      <p>❌ 失败用例总计: <xsl:value-of select="doctest/OverallResultsTestCases/@failures"/></p> 
+      <p>✅ 成功断言总计: <xsl:value-of select="doctest/OverallResultsAsserts/@successes"/></p> 
+      <p>❌ 失败断言总计: <xsl:value-of select="doctest/OverallResultsAsserts/@failures"/></p> 
+    </div>
   </body> 
   </html> 
 </xsl:template> 
