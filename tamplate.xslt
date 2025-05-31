@@ -43,8 +43,27 @@
         border-radius: 5px;
         margin-top: 20px;
       }
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .summary-item {
+        background: white;
+        padding: 10px;
+        border-radius: 4px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      }
       .summary p {
         margin: 5px 0;
+      }
+      .stats-label {
+        font-weight: 600;
+        color: #2e7d32;
+      }
+      .stats-value {
+        font-weight: bold;
+        font-size: 1.1em;
       }
     </style> 
   </head> 
@@ -96,11 +115,59 @@
     </table> 
     
     <div class="summary">
-      <h2>📊 测试汇总</h2> 
-      <p>✅ 成功用例总计: <xsl:value-of select="doctest/OverallResultsTestCases/@successes"/></p> 
-      <p>❌ 失败用例总计: <xsl:value-of select="doctest/OverallResultsTestCases/@failures"/></p> 
-      <p>✅ 成功断言总计: <xsl:value-of select="doctest/OverallResultsAsserts/@successes"/></p> 
-      <p>❌ 失败断言总计: <xsl:value-of select="doctest/OverallResultsAsserts/@failures"/></p> 
+      <h2>📊 测试汇总</h2>
+      
+      <!-- 基础统计信息 -->
+      <div class="summary-grid">
+        <div class="summary-item">
+          <p><span class="stats-label">测试套件总数：</span></p>
+          <p class="stats-value"><xsl:value-of select="count(doctest/TestSuite)"/></p>
+        </div>
+        
+        <div class="summary-item">
+          <p><span class="stats-label">测试用例总数：</span></p>
+          <p class="stats-value"><xsl:value-of select="count(//TestCase)"/></p>
+        </div>
+        
+        <div class="summary-item">
+          <p><span class="stats-label">成功用例：</span></p>
+          <p class="stats-value" style="color:#388e3c">✅ <xsl:value-of select="doctest/OverallResultsTestCases/@successes"/></p>
+        </div>
+        
+        <div class="summary-item">
+          <p><span class="stats-label">失败用例：</span></p>
+          <p class="stats-value" style="color:#d32f2f">❌ <xsl:value-of select="doctest/OverallResultsTestCases/@failures"/></p>
+        </div>
+      </div>
+      
+      <!-- 详细统计 -->
+      <div style="margin-top:20px">
+        <div class="summary-grid">
+          <div class="summary-item">
+            <p><span class="stats-label">成功断言：</span></p>
+            <p class="stats-value" style="color:#388e3c">✅ <xsl:value-of select="doctest/OverallResultsAsserts/@successes"/></p>
+          </div>
+          
+          <div class="summary-item">
+            <p><span class="stats-label">失败断言：</span></p>
+            <p class="stats-value" style="color:#d32f2f">❌ <xsl:value-of select="doctest/OverallResultsAsserts/@failures"/></p>
+          </div>
+          
+          <div class="summary-item">
+            <p><span class="stats-label">总断言数：</span></p>
+            <p class="stats-value"><xsl:value-of select="doctest/OverallResultsAsserts/@successes + doctest/OverallResultsAsserts/@failures"/></p>
+          </div>
+          
+          <div class="summary-item">
+            <p><span class="stats-label">通过率：</span></p>
+            <p class="stats-value">
+              <xsl:variable name="totalAsserts" select="doctest/OverallResultsAsserts/@successes + doctest/OverallResultsAsserts/@failures"/>
+              <xsl:variable name="passRate" select="format-number(doctest/OverallResultsAsserts/@successes div $totalAsserts * 100, '0.00')"/>
+              <xsl:value-of select="$passRate"/>%
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </body> 
   </html> 
