@@ -50,7 +50,7 @@
 
 ```bash
 sudo apt update
-sudo apt install gcc g++ cmake make
+sudo apt install gcc g++ cmake make xsltproc
 ```
 
 ## 编译代码
