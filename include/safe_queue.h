@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-24 12:17:47
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-05-24 13:26:53
+ * @LastEditTime: 2025-06-01 23:16:39
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -26,8 +26,9 @@ public:
     {
     }
 
-    ~SafeQueue() {
-       if (m_stop.load())
+    ~SafeQueue()
+    {
+        if (m_stop.load())
         {
             return;
         }
@@ -39,20 +40,20 @@ public:
     /**
      * @description: 向队列中添加元素
      * @param {T} value: 要添加的元素
-     * @return {void}
+     * @return {bool} true: push成功，false: push失败（队列已满）
      */
-    void push(const T &value)
+    bool push(const T &value)
     {
         std::lock_guard<std::mutex> glck(m_mutex);
         if (m_queue.size() >= m_cap)
         {
-            std::cout << "Queue is full, waiting for pop\n";
+            // Queue is full;
+            return false;
         }
-        else
-        {
-            m_queue.push(value);
-            m_cv.notify_one();
-        }
+
+        m_queue.push(value);
+        m_cv.notify_one();
+        return true;
     }
 
     /**
@@ -83,9 +84,8 @@ public:
         std::unique_lock<std::mutex> ulck(m_mutex);
         while (m_queue.empty() && !m_stop.load())
         {
-            m_cv.wait(ulck, [this]() {
-                return !m_queue.empty() || m_stop.load();
-            }); // 阻塞当前线程，并释放锁
+            m_cv.wait(ulck, [this]()
+                      { return !m_queue.empty() || m_stop.load(); }); // 阻塞当前线程，并释放锁
         }
         if (m_stop.load())
         {
