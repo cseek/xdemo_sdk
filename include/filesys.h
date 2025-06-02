@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-31 23:47:58
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-02 00:03:47
+ * @LastEditTime: 2025-06-02 10:46:46
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -215,15 +215,23 @@ namespace FileSys
         while ((entry = readdir(dir)) != nullptr)
         {
             if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
+            {
                 continue;
-            std::string path = dirname + "/" + entry->d_name;
+            }
             struct stat st;
+            std::string path(dirname);
+            path += "/"; // += 优于 append, 优于 +;
+            path += entry->d_name;
             if (stat(path.c_str(), &st) == 0)
             {
                 if (S_ISREG(st.st_mode))
+                {
                     total_size += st.st_size;
+                }
                 else if (S_ISDIR(st.st_mode))
+                {
                     total_size += calculate_directory_size_recursive(path);
+                }
             }
         }
         (void)closedir(dir);

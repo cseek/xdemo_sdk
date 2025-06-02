@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-24 14:37:10
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-05-30 13:28:49
+ * @LastEditTime: 2025-06-02 10:55:45
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -32,7 +32,7 @@ public:
     }
 
     bool init(const std::string &name,                                           // 日志器名称
-              const std::string &file = "./log/spdlog.log",                      // 日志文件名
+              const std::string &file = "./log/app.log",                         // 日志文件名
               const std::string &pattern = "[%Y-%m-%d %H:%M:%S.%f] [%^%L%$] %v", // 日志样式
               size_t rotation = 4,                                               // 日志文件满4个时开始滚动日志
               size_t file_size = 1024 * 1024 * 6,                                // 单个日志文件大小为6MB
