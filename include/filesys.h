@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-31 23:47:58
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-02 10:46:46
+ * @LastEditTime: 2025-06-02 16:46:40
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -85,29 +85,37 @@ namespace FileSys
      * @description: 写入文件内容（循环写，防止部分写入）
      * @param {string} &filename: 文件名
      * @param {string} &content: 要写入的内容
-     * @return {bool} true: 成功; false: 失败
+     * @return {ssize_t} 0～n: 实际写入字节数; -1: 失败
      */
-    inline bool write_file(const std::string &filename, const std::string &content)
+    inline ssize_t write_file(const std::string &filename, const std::string &content)
     {
-        int fd = open(filename.c_str(), O_WRONLY | O_CREAT | O_TRUNC | O_CLOEXEC, S_IRUSR | S_IWUSR);
+        // 使用更通用的权限设置 (0644)
+        int fd = open(filename.c_str(), O_WRONLY | O_CREAT | O_TRUNC | O_CLOEXEC,
+                      S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
         if (fd < 0)
         {
-            return false;
+            return -1;
         }
 
         size_t total_written = 0;
-        while (total_written < content.size())
+        const size_t content_size = content.size();
+        while (total_written < content_size)
         {
-            ssize_t bytes_written = write(fd, content.data() + total_written, content.size() - total_written);
-            if (bytes_written <= 0)
+            ssize_t bytes_written = write(fd, content.data() + total_written, content_size - total_written);
+            if (bytes_written < 0)
             {
-                close(fd);
-                return false;
+                if (errno == EINTR)
+                { // 处理信号中断
+                    continue;
+                }
+                break; // 其他错误退出循环
             }
+
             total_written += bytes_written;
         }
+
         (void)close(fd);
-        return true;
+        return static_cast<ssize_t>(total_written);
     }
 
     /**
