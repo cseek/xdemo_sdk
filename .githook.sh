@@ -1,4 +1,12 @@
 #!/bin/bash
+###
+ # @Author: aurson jassimxiong@gmail.com
+ # @Date: 2025-05-24 15:39:57
+ # @LastEditors: aurson jassimxiong@gmail.com
+ # @LastEditTime: 2025-06-02 11:01:18
+ # @Description: 
+ # Copyright (c) 2025 by Aurson, All Rights Reserved. 
+### 
 
 # 创建目标目录（如果不存在）
 HOOK_DIR=".git/hooks"
@@ -17,13 +25,13 @@ RESET="\033[0m"  # 重置颜色
 # 读取提交信息
 commit_message=$(cat "$1")
 
-# 定义正则表达式
-regex="^(feat|fix|docs|style|refactor|test|chore|perf|revert)(\([a-zA-Z0-9]+\))?:[[:space:]]+"
+# 定义正则表达式（简化为只需类型前缀）
+regex="^(feat|fix|docs|style|refactor|test|chore|perf|revert):[[:space:]]+"
 
 if ! [[ $commit_message =~ $regex ]]; then
   echo -e "${RED}提交信息不符合规范!${RESET}"
-  echo -e "${BLUE}规范: <类型>(<影响范围>): <描述>${RESET}"
-  echo -e "${BLUE}介绍:${RESET}"
+  echo -e "${BLUE}规范: <类型>: <描述>${RESET}"
+  echo -e "${BLUE}类型说明:${RESET}"
   echo -e "${BLUE}feat      新功能${RESET}"
   echo -e "${BLUE}fix       bug修复${RESET}"
   echo -e "${BLUE}docs      文档变更${RESET}"
@@ -35,9 +43,9 @@ if ! [[ $commit_message =~ $regex ]]; then
   echo -e "${BLUE}revert    回退提交${RESET}"
   echo -e "──────────────────────────────"
   echo -e "示例:"
-  echo -e "fix(uart): 修复uart接丢包的bug"
+  echo -e "fix: 修复uart接丢包的bug"
   echo -e ""
-  echo -e "温馨提示: 冒号后面有空格哦！要求是英文冒号哦!"
+  echo -e "温馨提示: 冒号后面必须有空格！使用英文冒号"
   echo -e ""
   exit 1
 fi
