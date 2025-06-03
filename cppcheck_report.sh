@@ -3,7 +3,7 @@
  # @Author: aurson jassimxiong@gmail.com
  # @Date: 2025-05-30 23:50:38
  # @LastEditors: aurson jassimxiong@gmail.com
- # @LastEditTime: 2025-06-03 18:02:11
+ # @LastEditTime: 2025-06-03 19:00:27
  # @Description: 
  # Copyright (c) 2025 by Aurson, All Rights Reserved. 
 ### 
@@ -23,7 +23,7 @@ cmake -DCMAKE_BUILD_TYPE=Release \
 make pack || exit
 # generate report
 xsltproc "$report_xslt" "$report_xml" > "$report_html" || exit
-echo "输出单元测试报告: $report_html"
+echo "静态分析报告: $report_html"
 # open the report in a web browser
 /bin/python3 << !EOF!
 import os, webbrowser, sys
