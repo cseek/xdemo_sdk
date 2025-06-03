@@ -1,13 +1,13 @@
 ```text
-      ___                 _______  __ __
-     / _ \___ __ _  ___  / __/ _ \/ //_/
-    / // / -_)  ' \/ _ \_\ \/ // / ,<   
-   /____/\__/_/_/_/\___/___/____/_/|_|  
+          ___                 _______  __ __
+         / _ \___ __ _  ___  / __/ _ \/ //_/
+        / // / -_)  ' \/ _ \_\ \/ // / ,<   
+       /____/\__/_/_/_/\___/___/____/_/|_|  
 ```
 
 <p align="lift">
-    <a href="#Language" alt="Language"><img src="https://img.shields.io/badge/language-cmake%20%7C%20shell%20%7C%20c%2Fc%2B%2B-blue" /></a>
-    <a href="#arch" alt="arch"><img src="https://img.shields.io/badge/arch-arm%20-important" /></a>
+    <a href="#Language" alt="Language"><img src="https://img.shields.io/badge/language-cmake%20%7C%20shell%20%7C%20python%20%7C%20c%2Fc%2B%2B-blue" /></a>
+    <a href="#arch" alt="arch"><img src="https://img.shields.io/badge/arch-arm%20%7C%20x86%20-important" /></a>
     <a href="#platform" alt="platform"><img src="https://img.shields.io/badge/platform-linux-blueviolet" /></a>
 </p>
 
