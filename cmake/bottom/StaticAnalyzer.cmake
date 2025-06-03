@@ -15,6 +15,7 @@ if(ENABLE_CPPCHECK)
             --enable=all
             --inline-suppr
             --inconclusive
+            --suppress=missingIncludeSystem
             --xml
             --xml-version=2
             --output-file=${CPPCHECK_REPORT_XML}

@@ -3,7 +3,7 @@
  # @Author: aurson jassimxiong@gmail.com
  # @Date: 2025-05-30 23:50:38
  # @LastEditors: aurson jassimxiong@gmail.com
- # @LastEditTime: 2025-06-03 17:52:08
+ # @LastEditTime: 2025-06-03 18:02:11
  # @Description: 
  # Copyright (c) 2025 by Aurson, All Rights Reserved. 
 ### 
@@ -14,7 +14,12 @@ report_html="$script_path/build/cppcheck_report.html"
 # build
 rm "$script_path/build" -r
 mkdir -p "$script_path/build"
-cd "$script_path/build" && cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_CPPCHECK=ON -DCPPCHECK_REPORT_XML="$report_xml" ../
+cd "$script_path/build" || exit
+cmake -DCMAKE_BUILD_TYPE=Release \
+	-DENABLE_CPPCHECK=ON \
+	-DCPPCHECK_REPORT_XML="$report_xml" \
+	-DCMAKE_TOOLCHAIN_PATH="${script_path}"/cmake/ToolChainX64.cmake \
+	../
 make pack || exit
 # generate report
 xsltproc "$report_xslt" "$report_xml" > "$report_html" || exit

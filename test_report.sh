@@ -3,7 +3,7 @@
  # @Author: aurson jassimxiong@gmail.com
  # @Date: 2025-05-30 23:50:38
  # @LastEditors: aurson jassimxiong@gmail.com
- # @LastEditTime: 2025-06-03 17:45:43
+ # @LastEditTime: 2025-06-03 18:05:33
  # @Description: 
  # Copyright (c) 2025 by Aurson, All Rights Reserved. 
 ### 
@@ -13,9 +13,13 @@ report_xslt="$script_path/test_report.xslt"
 report_xml="$script_path/build/test_report.xml"
 report_html="$script_path/build/test_report.html"
 # build test executable
+rm -r "$script_path/build"
 mkdir -p "$script_path/build"
-cd "$script_path/build" && cmake -DCMAKE_BUILD_TYPE=Release ../
-make test || exit
+cd "$script_path/build" || exit
+cmake -DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_TOOLCHAIN_PATH="${script_path}"/cmake/ToolChainX64.cmake \
+	../
+make test -j20 || exit
 # run test and generate report
 $test_exe --r=xml --o="$report_xml"
 xsltproc "$report_xslt" "$report_xml" > "$report_html" || exit
