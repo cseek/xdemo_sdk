@@ -30,7 +30,7 @@
 ***
 
 ## 项目简介
-这是一个用于 xxx 的 <font color = green> Linux C++ SDK</font>，主要用来 xxx。
+这是一个<font color = green> Linux C++ SDK</font>的 Demo。
 
 ## 目录结构
 
