@@ -1,11 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
 project(xdemo_sdk LANGUAGES CXX VERSION 1.0.0)
 
-set(CMAKE_CXX_STANDARD 17)
+set(TOP ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install)
+
+option(ENABLE_CLANG_TIDY "Enable static analysis with Clang-Tidy." OFF)
+option(ENABLE_CPPCHECK "Enable static analysis with Cppcheck." OFF)
+include(${TOP}/cmake/bottom/StaticAnalyzer.cmake)
 
 add_subdirectory(src)
 add_subdirectory(example)

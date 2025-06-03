@@ -1,9 +1,10 @@
-add_executable(xdemo main.cpp)
+set(EXE "xdemo")
+add_executable(${EXE} main.cpp)
 target_link_libraries(
-    xdemo PRIVATE 
+    ${EXE} PRIVATE 
     ${PROJECT_NAME}_static
 )
 target_include_directories(
-    xdemo PRIVATE
+    ${EXE} PRIVATE
     ${CMAKE_SOURCE_DIR}/include
 )

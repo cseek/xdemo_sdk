@@ -3,21 +3,20 @@
  # @Author: aurson jassimxiong@gmail.com
  # @Date: 2025-05-30 23:50:38
  # @LastEditors: aurson jassimxiong@gmail.com
- # @LastEditTime: 2025-06-03 17:45:43
+ # @LastEditTime: 2025-06-03 17:52:08
  # @Description: 
  # Copyright (c) 2025 by Aurson, All Rights Reserved. 
 ### 
 script_path=$(pwd)
-test_exe="$script_path/build/test/test_xdemo_sdk"
-report_xslt="$script_path/test_report.xslt"
-report_xml="$script_path/build/test_report.xml"
-report_html="$script_path/build/test_report.html"
-# build test executable
+report_xslt="$script_path/cppcheck_report.xslt"
+report_xml="$script_path/build/cppcheck_report.xml"
+report_html="$script_path/build/cppcheck_report.html"
+# build
+rm "$script_path/build" -r
 mkdir -p "$script_path/build"
-cd "$script_path/build" && cmake -DCMAKE_BUILD_TYPE=Release ../
-make test || exit
-# run test and generate report
-$test_exe --r=xml --o="$report_xml"
+cd "$script_path/build" && cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_CPPCHECK=ON -DCPPCHECK_REPORT_XML="$report_xml" ../
+make pack || exit
+# generate report
 xsltproc "$report_xslt" "$report_xml" > "$report_html" || exit
 echo "输出单元测试报告: $report_html"
 # open the report in a web browser

@@ -50,7 +50,7 @@
 
 ```bash
 sudo apt update
-sudo apt install gcc g++ cmake make xsltproc
+sudo apt install gcc g++ cmake make xsltproc cppcheck
 ```
 
 ## 编译代码
