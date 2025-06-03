@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-24 14:37:10
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-02 10:55:45
+ * @LastEditTime: 2025-06-03 08:25:05
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -75,6 +75,19 @@ public:
     }
 
     template <typename... Args>
+    inline void log_critical(const char *fmt, Args... args)
+    {
+        if (m_logger)
+        {
+            m_logger->critical(fmt, args...);
+        }
+        else
+        {
+            SPDLOG_CRITICAL(fmt, args...);
+        }
+    }
+
+    template <typename... Args>
     inline void log_error(const char *fmt, Args... args)
     {
         if (m_logger)
@@ -127,15 +140,15 @@ public:
     }
 
     template <typename... Args>
-    inline void log_critical(const char *fmt, Args... args)
+    inline void log_trace(const char *fmt, Args... args)
     {
         if (m_logger)
         {
-            m_logger->critical(fmt, args...);
+            m_logger->trace(fmt, args...);
         }
         else
         {
-            SPDLOG_CRITICAL(fmt, args...);
+            SPDLOG_TRACE(fmt, args...);
         }
     }
 
