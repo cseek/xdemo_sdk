@@ -11,100 +11,133 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 20px;
       color: #333;
+      background-color: #f8f9fa;
     }
     .header {
-      background-color: #c8e6c9; /* 浅绿色背景 */
-      color: #2e7d32; /* 深绿色文字 */
-      font-weight: bold;
+      background: linear-gradient(135deg, #1a237e, #0d47a1); /* 加深蓝色梯度 */
+      color: white;
       text-align: center;
-      padding: 10px;
-      border-radius: 4px;
-      margin-bottom: 20px;
+      padding: 25px 30px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 加深阴影 */
     }
-    h1, h2 {
-      color: #2e7d32;
-      border-bottom: 2px solid #c8e6c9;
-      padding-bottom: 8px;
+    .header h1 {
+      font-weight: 700; /* 加粗字体 */
+      margin-bottom: 8px;
+      font-size: 2.4rem; /* 增大字号 */
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 添加文字阴影 */
+      letter-spacing: 0.5px; /* 增加字间距 */
+    }
+    .header p {
+      opacity: 0.9;
+      font-size: 1.1rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2); /* 副标题也添加阴影 */
+    }
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
     }
     table {
       border-collapse: collapse;
       width: 100%;
       margin-top: 15px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
     }
     th, td {
-      border: 1px solid #e0e0e0;
-      padding: 10px 12px;
+      border: 1px solid #f0f0f0;
+      padding: 14px 20px;
       text-align: left;
       vertical-align: top;
     }
     th {
-      background-color: #f1f8e9;
-      font-weight: bold;
+      background-color: #f5f7ff;
+      color: #1a237e;
+      font-weight: 600;
+      border-bottom: 2px solid #e0e0e0;
     }
-    .error {
-      background-color: #ffebee; /* 错误红色背景 */
-    }
-    .warning {
-      background-color: #fff8e1; /* 警告黄色背景 */
-    }
-    .style {
-      background-color: #e8f5e9; /* 样式建议绿色背景 */
-    }
-    .information {
-      background-color: #e3f2fd; /* 信息蓝色背景 */
+    tr:hover {
+      background-color: #f8fbff;
     }
     .severity-tag {
       display: inline-block;
-      padding: 3px 8px;
-      border-radius: 12px;
-      font-size: 0.85em;
-      font-weight: bold;
+      padding: 5px 12px;
+      border-radius: 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+      min-width: 80px;
     }
-    .error .severity-tag { background-color: #ffcdd2; color: #b71c1c; }
-    .warning .severity-tag { background-color: #ffecb3; color: #7d6608; }
-    .style .severity-tag { background-color: #c8e6c9; color: #1b5e20; }
-    .information .severity-tag { background-color: #bbdefb; color: #0d47a1; }
+    .error .severity-tag { 
+      background-color: #ffcdd2; 
+      color: #d32f2f; 
+    }
+    .warning .severity-tag { 
+      background-color: #ffe0b2; 
+      color: #f57c00; 
+    }
+    .style .severity-tag { 
+      background-color: #bbdefb; 
+      color: #1976d2; 
+    }
+    .information .severity-tag { 
+      background-color: #e1bee7; 
+      color: #7b1fa2; 
+    }
     .location {
       font-family: monospace;
       font-size: 0.9em;
       color: #555;
     }
     .summary {
-      background-color: #f1f8e9;
-      padding: 15px;
-      border-radius: 5px;
+      background-color: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       margin: 20px 0;
     }
     .summary-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
       margin-top: 10px;
     }
     .summary-item {
       background: white;
-      padding: 15px;
-      border-radius: 4px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      padding: 20px 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
       text-align: center;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s ease;
+    }
+    .summary-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     .stats-label {
-      font-size: 0.9em;
-      color: #666;
-      margin-bottom: 5px;
+      font-size: 0.95rem;
+      color: #616161;
+      margin-bottom: 8px;
+      font-weight: 500;
     }
     .stats-value {
-      font-weight: bold;
-      font-size: 1.8em;
-      color: #2e7d32;
+      font-weight: 700;
+      font-size: 2.2rem;
     }
     .error-count { color: #d32f2f; }
+    .warning-count { color: #f57c00; }
+    .style-count { color: #1976d2; }
+    .information-count { color: #7b1fa2; }
     .footer {
       text-align: center;
       margin-top: 30px;
-      color: #777;
-      font-size: 0.9em;
+      color: #757575;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -136,17 +169,17 @@
       
       <div class="summary-item">
         <div class="stats-label">警告</div>
-        <div class="stats-value"><xsl:value-of select="$warnings"/></div>
+        <div class="stats-value warning-count"><xsl:value-of select="$warnings"/></div>
       </div>
       
       <div class="summary-item">
         <div class="stats-label">代码风格</div>
-        <div class="stats-value"><xsl:value-of select="$styles"/></div>
+        <div class="stats-value style-count"><xsl:value-of select="$styles"/></div>
       </div>
       
       <div class="summary-item">
         <div class="stats-label">信息</div>
-        <div class="stats-value"><xsl:value-of select="$infos"/></div>
+        <div class="stats-value information-count"><xsl:value-of select="$infos"/></div>
       </div>
     </div>
   </div>
@@ -217,7 +250,7 @@
     <td>
       <xsl:choose>
         <xsl:when test="@cwe">
-          <a href="https://cwe.mitre.org/data/definitions/{@cwe}.html" target="_blank" style="color:#2e7d32; text-decoration:none;">
+          <a href="https://cwe.mitre.org/data/definitions/{@cwe}.html" target="_blank" style="color:#1a237e; text-decoration:none;">
             CWE-<xsl:value-of select="@cwe"/>
           </a>
         </xsl:when>
