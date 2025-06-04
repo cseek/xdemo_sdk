@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-29 13:30:15
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-03 17:28:59
+ * @LastEditTime: 2025-06-04 18:09:52
  * @Description: sdk 的 C 语言接口头文件
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -15,7 +15,7 @@
 extern "C"
 {
 #endif
-    typedef void (*OutputCallback)(const Output *output);
+    typedef void (OutputCallback)(const Output *output);
 
     /**
      * @description: 初始化 SDK
@@ -35,7 +35,7 @@ extern "C"
      * @param {OutputCallback} output_callback
      * @return {ResCode} 返回码
      */    
-    XDEMO_SDK_API ResCode set_output_callback(const OutputCallback output_callback);
+    XDEMO_SDK_API ResCode set_output_callback(const OutputCallback *output_callback);
 
     /**
      * @description: 输入数据
