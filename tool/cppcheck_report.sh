@@ -3,7 +3,7 @@
  # @Author: aurson jassimxiong@gmail.com
  # @Date: 2025-05-30 23:50:38
  # @LastEditors: aurson jassimxiong@gmail.com
- # @LastEditTime: 2025-06-04 01:00:43
+ # @LastEditTime: 2025-06-04 23:13:28
  # @Description: 
  # Copyright (c) 2025 by Aurson, All Rights Reserved. 
 ### 
@@ -27,7 +27,7 @@ cmake -B ${build_dir} \
       -DCMAKE_BUILD_TYPE=${build_type} \
       ${project_dir} || exit
 
-cmake --build ${build_dir} --target example --parallel
+cmake --build ${build_dir} --target pack --parallel
 # 生成报告
 xsltproc "$report_xslt" "$report_xml" > "$report_html" || exit
 echo "静态分析报告: $report_html"
