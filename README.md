@@ -38,25 +38,62 @@
 
 ```bash
 .
-├── deps       # 第三方库
-├── example    # 示例
-├── include    # 头文件
-├── src        # 源代码
-└── test       # 单元测试
+├── cmake/
+│  ├── ToolchainArm64   # 编译器配置
+│  ├── ToolchainX64     # 编译器配置
+│  └── bottom/  # 一些底层 cmake 代码
+├── deps/       # 第三方库
+├── doc/        # 文档或者文档需要的素材
+├── example/    # 示例
+├── includ/e    # 头文件
+├── src/        # 源代码
+├── test/       # 单元测试
+├── tool/       # 一些脚本工具
+├── xslt/       # 一些用于生成 html 的模板
+└── build.sh    # 编译脚本
 ```
 
 ## 开发环境
-+ ubuntu20.04 +
-+ gcc 8.0 +
-+ cmake 3.10 + 
+
+### X64
 
 ```bash
 sudo apt update
 sudo apt install gcc g++ cmake make xsltproc cppcheck
 ```
+### Arm64
+
+安装自己的交叉编译器，在 `cmake/ToolchainArm64.cmake` 里配置就行。
 
 ## 编译代码
+
+### 自动编译
+
+如果不带参数编译，默认的构建类型为 Release, 默认的目标平台是 X64
+
+```bash
+$ ./build.sh -h
+用法: ./build.sh [-b <构建类型>] [-p <平台>]
+选项:
+  -b, --build-type   指定构建类型 (Debug|Release), 默认: Release
+  -p, --platform     指定目标平台 (X86|X64|Arm64), 默认: X64
+  -h, --help         显示此帮助信息
+
+示例: ./build.sh -b Release -p X86
+```
+
+在项目根目录运行编译脚本即可编译
+
+```bash
+# 编译
+./build.sh -b Release -p X64
+```
+
+### 手动编译
 编译前先创建一个 build 目录，并生成 makefile，操作如下（在项目根目录执行）:
+
+1. 生成 makefile
+
 ```bash
 mkdir -p build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
@@ -65,30 +102,24 @@ cmake -DCMAKE_BUILD_TYPE=Debug ..
 # 如果是使用交叉编译器，请在 cmake 文件里配置并指定配置
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_PATH=../cmake/ToolChain.cmake ..
 ```
-+ 编译示例
+2. 编译示例
 ```bash
-# 编译示例
-make example
-# 查看编译生成的示例
-ls bin
+make example # ls ./bin
 ```
-+ 编译并打包 sdk
+
+3. 编译并打包 sdk
 ```bash
-# 编译 SDK
-make pack
-# 查看编译生成的 SDK 包
-ls install
+make pack # ls ./install
 ```
-+ 编译单元测试
+
+4. 编译单元测试
 ```bash
-# 编译单元测试
-make test
-# 查看编译生成的单元测试
-ls test
+make test # ls ./test
 ```
 
 ## 静态检查
-+ 一键检查并生成测试报告
+
+一键扫描并生成测试报告
 
 ```bash
 ../tool/cppcheck_report.sh
@@ -96,55 +127,46 @@ ls test
 ![](doc/cppcheck_report.png)
 
 ## 单元测试
-本项目采用 doctest 实现单元测试；doctest 是一个超轻量级的单元测试框架；可以实现多个测试套件（测试用例集），一个测试套件可以包含多个用例，测试时可以灵活控制要测试哪些用例或者哪些套件；用法如下：
+本项目采用 doctest 实现单元测试；doctest 是一个超轻量级的单元测试框架；可以实现多个测试套件（测试用例集），一个测试套件可以包含多个用例，测试时可以灵活控制要测试哪些用例或者哪些套件。
 
-+ 查看所有用法
-```bash
-./test/test_xdemo_sdk --help
-```
+### 自动测试
 
-+ 列出所有套件
 ```bash
-./test/test_xdemo_sdk -lts
-```
-
-+ 列出所有用例
-```bash
-./test/test_xdemo_sdk -ltc
-```
-
-+ 测试某个套件
-```bash
-# 复制列出来的测试套件，粘贴代替 xxx 即可
-./test/test_xdemo_sdk -lts=xxx
-```
-
-+ 测试某个用例
-```bash
-# 复制列出来的测试用例，粘贴代替 xxx 即可
-./test/test_xdemo_sdk -ltc=xxx
-```
-
-+ 测试所有用例
-```bash
-./test/test_xdemo_sdk
-```
-
-+ 一键测试并生成报告
-```bash
-../tool/test_report.sh
+../tool/test_report.sh # 一键测试并生成报告
 ```
 ![](doc/test_report.png)
 
+### 手动测试
+
+```bash
+./test/test_xdemo_sdk --help    # 查看所有用法
+./test/test_xdemo_sdk -lts      # 列出所有套件
+./test/test_xdemo_sdk -ltc      # 列出所有用例
+./test/test_xdemo_sdk -lts=xxx  # 复制列出来的测试套件，粘贴代替 xxx 即可测试某个套件
+./test/test_xdemo_sdk -ltc      # 复制列出来的测试用例，粘贴代替 xxx 即可测试某个用例
+./test/test_xdemo_sdk           # 测试所有用例
+```
+
 ## 完成情况
 
-+ [X] 初始化
-+ [X] 开始
-+ [X] 停止
-+ [ ] 设置回调
++ [X] git commit 强制检查;
++ [X] cppcheck 扫描并生成可视化报告;
++ [X] doctest 单元测试并生成可视化测试报告;
++ [X] SDK 同时支持 C 语言 和 C++ 接口;
++ [X] 常用文件操作函数;
++ [X] MD5 校验接口;
++ [X] 线程安全队列;
++ [X] 单例模板;
++ [X] 线程常用操作;
++ [X] 程序耗时计算;
++ [X] 常用时间获取接口;
++ [X] 高性能异步日志 spdlog 封装;
++ [X] 常用宏函数;
++ [X] 系统命令调用接口;
++ [ ] 串口操作
 
 ## 开发指南
-[wiki](https://github.com/cseek/xdemo_sdk/wiki)
+TODO： [wiki](https://github.com/cseek/xdemo_sdk/wiki)
 
 ***
 👩‍💻 <font color = red> 问题反馈: </font> jassimxiong@gmail.com
