@@ -2,8 +2,8 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-24 12:17:47
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-01 23:16:39
- * @Description:
+ * @LastEditTime: 2025-06-05 11:20:15
+ * @Description: 线程安全的队列，数据存储在堆上，适合用于大数据量的场景，比如图像领域
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #ifndef __SAFE_QUEUE_H__
@@ -22,7 +22,8 @@ class SafeQueue
 {
 public:
     explicit SafeQueue(uint32_t cap = 200)
-        : m_cap(cap), m_stop(false)
+        : m_cap(cap)
+        , m_stop(false)
     {
     }
 
