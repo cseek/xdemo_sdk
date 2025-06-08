@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-20 15:01:24
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-03 08:37:46
+ * @LastEditTime: 2025-06-08 21:11:32
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -16,24 +16,24 @@
 #endif
 
 /* 数据源 */
-enum DataSource
+typedef enum
 {
     INTERNAL = 0, // 内部数据源
     EXTERNAL = 1  // 外部数据源
-};
+} DataSource;
 
 /* 输入的数据 */
-struct Input
+typedef struct
 {
-};
+} Input;
 
 /* 输出的数据 */
-struct Output
+typedef struct
 {
-};
+} Output;
 
 /* 配置 */
-struct LogConfig
+typedef struct
 {
     char path[512];   // 日志存放路径
     int size;         // 留给日志文件的空间大小，单位为 MB
@@ -47,10 +47,10 @@ struct LogConfig
         CRITICAL = 5, // 严重错误信息
         OFF = 6       // 关闭日志
     } level;
-};
+} LogConfig;
 
 /* 返回码 */
-enum ResCode
+typedef enum
 {
     SUCCESS = 200,              // 成功
     ERROR_UNKNOWN = 201,        // 未知错误
@@ -59,6 +59,6 @@ enum ResCode
     ERROR_UNSUPPORTED = 204,    // 不支持的操作
     ERROR_NO_NEED = 205,        // 不需要的操作
     ERROR_NOT_INITIALIZED = 206 // 未初始化
-};
+} ResCode;
 
 #endif // __COMMON_H__

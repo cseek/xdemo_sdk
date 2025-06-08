@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(xdemo_sdk LANGUAGES CXX VERSION 1.0.0)
+project(xdemo_sdk LANGUAGES C CXX VERSION 1.0.0)
 
 set(TOP ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
