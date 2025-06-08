@@ -2,14 +2,13 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-24 14:37:10
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-08 17:46:56
+ * @LastEditTime: 2025-06-08 20:53:55
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #ifndef __XLOGGER_H__
 #define __XLOGGER_H__
 
-#include "make_unique.h"
 #include "spdlog/async.h"
 #include "spdlog/fmt/bin_to_hex.h"
 #include "spdlog/sinks/basic_file_sink.h"
@@ -49,7 +48,7 @@ public:
             auto stdout_sink = std::make_shared<stdout_sink_t>();
             auto rotating_sink = std::make_shared<rotating_sink_t>(file, file_size, rotation);
             std::vector<spdlog::sink_ptr> sinks{stdout_sink, rotating_sink};
-            m_logger = make_unique<spdlog::logger>(name, sinks.begin(), sinks.end());
+            m_logger = std::move(std::unique_ptr<spdlog::logger>(new spdlog::logger(name, sinks.begin(), sinks.end())));
             m_logger->set_pattern(pattern);
             m_logger->set_level(level);
             m_logger->flush_on(flush_on);
