@@ -41,7 +41,7 @@
         overflow: hidden;
       }
       th, td {
-        border: 1px solid #eaeaea; /* 加深边框颜色 */
+        border: 1px solid #f0f0f0;
         padding: 14px 20px;
         text-align: left;
         vertical-align: top;
@@ -50,9 +50,9 @@
         background-color: #f1f8e9;
         color: #2e7d32;
         font-weight: 600;
-        border-bottom: 2px solid #d0d0d0; /* 加深表头下边框 */
+        border-bottom: 2px solid #e0e0e0;
       }
-      tr:not(.test-suite-row):hover {
+      tr:hover {
         background-color: #f8fffb;
       }
       .result-tag {
@@ -119,35 +119,20 @@
         font-size: 0.9rem;
       }
       .test-suite {
-        background-color: #e8f5e9; /* 更亮的背景色 */
+        background-color: #f1f8e9;
         vertical-align: middle;
         font-weight: bold;
         color: #2e7d32;
-        border-top: 2px solid #c8e6c9 !important; /* 添加上边框 */
-        border-bottom: 2px solid #c8e6c9 !important; /* 添加下边框 */
-        position: relative;
-      }
-      .test-suite-row {
-        background-color: #e8f5e9;
-      }
-      .test-suite:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -2px;
-        height: 2px;
-        background: #c8e6c9;
-      }
-      .suite-separator {
-        height: 10px;
-        background-color: #f8f9fa;
-        border-top: 2px solid #c8e6c9;
-        border-bottom: 2px solid #c8e6c9;
       }
       .expression {
         font-family: monospace;
         font-size: 0.95em;
+      }
+      /* 新增分隔线样式 */
+      .suite-divider td {
+        border-bottom: 1px solid #bdbdbd !important;
+        padding: 0 !important;
+        height: 0;
       }
       @media (max-width: 768px) {
         .header h1 {
@@ -233,13 +218,8 @@
             <xsl:for-each select="doctest/TestSuite"> 
               <xsl:variable name="testSuite" select="@name"/> 
               <xsl:variable name="totalRows" select="count(TestCase/Expression) + count(TestCase[not(Expression)])"/> 
-              
-              <!-- 添加测试套件分隔行 -->
-              <xsl:if test="position() > 1">
-                <tr class="suite-separator">
-                  <td colspan="4"></td>
-                </tr>
-              </xsl:if>
+              <xsl:variable name="suitePosition" select="position()"/>
+              <xsl:variable name="totalSuites" select="last()"/>
               
               <xsl:for-each select="TestCase"> 
                 <xsl:variable name="testCase" select="@name"/> 
@@ -281,6 +261,13 @@
                   </xsl:otherwise> 
                 </xsl:choose> 
               </xsl:for-each> 
+              
+              <!-- 添加测试套件分隔线 -->
+              <xsl:if test="$suitePosition != $totalSuites">
+                <tr class="suite-divider">
+                  <td colspan="4"></td>
+                </tr>
+              </xsl:if>
             </xsl:for-each>
           </xsl:otherwise>
         </xsl:choose>
