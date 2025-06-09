@@ -9,6 +9,7 @@ set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install)
 
 option(ENABLE_CPPCHECK "Enable static analysis with Cppcheck." OFF)
 include(${TOP}/cmake/bottom/StaticAnalyzer.cmake)
+include(${TOP}/cmake/bottom/GitHash.cmake)
 
 add_subdirectory(src)
 add_subdirectory(example)

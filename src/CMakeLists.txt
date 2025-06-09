@@ -53,7 +53,14 @@ target_compile_options(
 target_compile_definitions(
     ${PROJECT_NAME}_shared PRIVATE
     XDEMO_SDK_SHARED
+    GIT_HASH="${GIT_HASH}"
 )
+
+target_compile_definitions(
+    ${PROJECT_NAME}_static PRIVATE
+    GIT_HASH="${GIT_HASH}"
+)
+
 # 安装目标
 install(
     TARGETS ${PROJECT_NAME}_static ${PROJECT_NAME}_shared
