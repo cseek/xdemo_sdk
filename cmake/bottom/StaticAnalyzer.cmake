@@ -1,27 +1,42 @@
-if(ENABLE_CLANG_TIDY)
-    find_program(CLANGTIDY clang-tidy)
-    if(CLANGTIDY)
-        set(CMAKE_CXX_CLANG_TIDY ${CLANGTIDY} -extra-arg=-Wno-unknown-warning-option)
-        message("Clang-Tidy finished setting up.")
-    else()
-        message(SEND_ERROR "Clang-Tidy requested but executable not found.")
-    endif()
-endif()
-
 if(ENABLE_CPPCHECK)
     find_program(CPPCHECK cppcheck)
     if(CPPCHECK)
-        set(CMAKE_CXX_CPPCHECK ${CPPCHECK} 
-            --enable=all
+        file(GLOB_RECURSE CHECK_SRCS
+            ${TOP}/src/*.c
+            ${TOP}/src/*.cpp
+            ${TOP}/example/*.c
+            ${TOP}/example/*.cpp
+            ${TOP}/include/*.h
+        )
+        execute_process(
+            COMMAND cppcheck
             --inline-suppr
+            --std=c++11
+            --enable=all
+            --quiet
+            --force
             --inconclusive
+            --language=c++
             --suppress=missingIncludeSystem
+            --suppress=missingInclude
+            ${CHECK_SRCS}
             --xml
             --xml-version=2
             --output-file=${CPPCHECK_REPORT_XML}
-            -i${TOP}/deps/**
-            -i${TOP}/build/**
         )
+        # set(CMAKE_CXX_CPPCHECK ${CPPCHECK} 
+        #     --inline-suppr
+        #     --std=c++11
+        #     --enable=all
+        #     --quiet
+        #     --force
+        #     --inconclusive
+        #     --language=c++
+        #     --suppress=missingIncludeSystem
+        #     --xml
+        #     --xml-version=2
+        #     --output-file=${CPPCHECK_REPORT_XML}
+        # )
         message("Cppcheck finished setting up.")
     else()
         message(SEND_ERROR "Cppcheck requested but executable not found.")
