@@ -1,0 +1,141 @@
+/*
+ * @Author: aurson jassimxiong@gmail.com
+ * @Date: 2025-06-10 14:23:39
+ * @LastEditors: aurson jassimxiong@gmail.com
+ * @LastEditTime: 2025-06-10 22:02:55
+ * @Description: 定时器类，基于 timerfd 实现，约 0.1 毫秒精度。
+ * Copyright (c) 2025 by Aurson, All Rights Reserved.
+ */
+#ifndef __TIMER_H__
+#define __TIMER_H__
+
+#include "thread.h"
+#include <stdio.h>
+#include <sys/epoll.h>
+#include <sys/eventfd.h>
+#include <sys/timerfd.h>
+#include <unistd.h>
+#include <cstdint>
+#include <cstring>
+#include <chrono>
+#include <cerrno>
+#include <thread>
+#include <string>
+#include <functional>
+
+class Timer
+{
+public:
+    using TaskCallback = std::function<void(void)>;
+    // clang-format off
+    Timer(uint64_t ms, const TaskCallback &callback, const std::string &timer_name = "")
+        : m_is_running(false)
+        , m_timer_fd(-1)
+        , m_interval_ms(ms)
+        , m_callback(callback)
+        , m_timer_name(timer_name)
+    {
+    }
+    // clang-format on
+    Timer(const Timer &) = delete;
+    Timer &operator=(const Timer &) = delete;
+
+    ~Timer()
+    {
+        stop();
+    }
+
+    void start()
+    {
+        if (m_is_running)
+        {
+            return;
+        }
+
+        m_timer_fd = timerfd_create(CLOCK_MONOTONIC, 0);
+        if (m_timer_fd == -1)
+        {
+            perror("timerfd_create failed");
+            return;
+        }
+
+        struct itimerspec its;
+        memset(&its, 0, sizeof(its));
+        uint64_t ms = m_interval_ms;
+        its.it_interval.tv_sec = ms / 1000;
+        its.it_interval.tv_nsec = (ms % 1000) * 1000000;
+        its.it_value = its.it_interval;
+
+        if (timerfd_settime(m_timer_fd, 0, &its, nullptr) == -1)
+        {
+            perror("timerfd_settime failed");
+            close(m_timer_fd);
+            m_timer_fd = -1;
+            return;
+        }
+        m_is_running = true;
+        // clang-format off
+        m_thread = std::thread([&]()
+        {
+            if (!m_timer_name.empty())
+            {
+                Thread::set_thread_name(m_timer_name);
+            }
+            while (m_is_running)
+            {
+                uint64_t expirations;
+                ssize_t bytes = read(m_timer_fd, &expirations, sizeof(expirations));
+                if (bytes == sizeof(expirations))
+                {
+                    if (expirations > 0)
+                    {
+                        for (uint64_t i = 0; i < expirations; ++i)
+                        {
+                            m_callback();
+                        }
+                    }
+                }
+                else
+                {
+                    if (errno == EBADF || !m_is_running)
+                    {
+                        break;
+                    }
+                    perror("read timerfd failed");
+                }
+            }
+        });
+        // clang-format on
+    }
+
+    void stop()
+    {
+        if (!m_is_running)
+        {
+            return;
+        }
+
+        m_is_running = false;
+
+        if (m_timer_fd != -1)
+        {
+            close(m_timer_fd);
+            m_timer_fd = -1;
+        }
+
+        if (m_thread.joinable())
+        {
+            m_thread.join();
+        }
+    }
+
+private:
+    int m_timer_fd;
+    bool m_is_running;
+    uint64_t m_interval_ms;
+    std::string m_timer_name;
+    std::thread m_thread;
+    TaskCallback m_callback;
+};
+
+#endif // __TIMER_H__
