@@ -2,8 +2,8 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-06-10 14:23:39
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-10 22:02:55
- * @Description: 定时器类，基于 timerfd 实现，约 0.1 毫秒精度。
+ * @LastEditTime: 2025-06-11 00:40:49
+ * @Description: 定时器类，基于 timerfd 实现，约 0.1 毫秒精度，start 后会马上先触发一次。
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #ifndef __TIMER_H__
@@ -28,6 +28,12 @@ class Timer
 public:
     using TaskCallback = std::function<void(void)>;
     // clang-format off
+    /**
+     * @description: 定时器构造函数
+     * @param ms: 定时器间隔时间，单位毫秒
+     * @param callback: 定时器触发时调用的回调函数
+     * @param timer_name: 定时器名称，用于调试和日志记录
+     */
     Timer(uint64_t ms, const TaskCallback &callback, const std::string &timer_name = "")
         : m_is_running(false)
         , m_timer_fd(-1)
@@ -44,7 +50,9 @@ public:
     {
         stop();
     }
-
+    /**
+     * @description: 启动定时器
+     */
     void start()
     {
         if (m_is_running)
@@ -107,7 +115,9 @@ public:
         });
         // clang-format on
     }
-
+    /**
+     * @description: 停止定时器
+     */
     void stop()
     {
         if (!m_is_running)
@@ -127,6 +137,14 @@ public:
         {
             m_thread.join();
         }
+    }
+    /**
+     * @description: 获取定时器名
+     * @return {std::string &} 返回定时器名称的引用
+     */
+    auto get_timer_name() const -> const std::string &
+    {
+        return m_timer_name;
     }
 
 private:
