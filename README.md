@@ -72,21 +72,21 @@ sudo apt install gcc g++ cmake make xsltproc cppcheck
 如果不带参数编译，默认的构建类型为 Release, 默认的目标平台是 X64
 
 ```bash
-$ ./build.sh -h
-用法: ./build.sh [-b <构建类型>] [-p <平台>]
+$ ./compile.sh -h
+用法: ./compile.sh [-b <构建类型>] [-p <平台>]
 选项:
   -b, --build-type   指定构建类型 (Debug|Release), 默认: Release
   -p, --platform     指定目标平台 (X86|X64|Arm64), 默认: X64
   -h, --help         显示此帮助信息
 
-示例: ./build.sh -b Release -p X86
+示例: ./compile.sh -b Release -p X86
 ```
 
 在项目根目录运行编译脚本即可编译
 
 ```bash
 # 编译
-./build.sh -b Release -p X64
+./compile.sh -b Release -p X64
 ```
 
 ### 手动编译
