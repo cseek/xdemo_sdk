@@ -21,7 +21,11 @@ public:
         m_last_update = std::chrono::steady_clock::now();
         m_prev_proc_time = get_process_time();
     }
-
+    /**
+     * @description: 获取CPU使用率
+     * @return {double} 返回CPU使用率百分比
+     * @note: 该方法返回的CPU使用率是自上次调用以来的平均值
+     */
     double get_usage()
     {
         auto now = std::chrono::steady_clock::now();
