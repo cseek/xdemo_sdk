@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-24 14:37:10
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-14 13:48:17
+ * @LastEditTime: 2025-06-14 16:43:52
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -18,13 +18,12 @@
 #include "spdlog/spdlog.h"
 #include <memory>
 
-#define XloggerInstance Singleton<Xlogger>::instance()
-#define XLOGT(fmt, ...) XloggerInstance.log_trace(fmt, ##__VA_ARGS__)
-#define XLOGD(fmt, ...) XloggerInstance.log_debug(fmt, ##__VA_ARGS__)
-#define XLOGI(fmt, ...) XloggerInstance.log_info(fmt, ##__VA_ARGS__)
-#define XLOGW(fmt, ...) XloggerInstance.log_warn(fmt, ##__VA_ARGS__)
-#define XLOGE(fmt, ...) XloggerInstance.log_error(fmt, ##__VA_ARGS__)
-#define XLOGC(fmt, ...) XloggerInstance.log_critical(fmt, ##__VA_ARGS__)
+#define XLOGT(fmt, ...) Singleton<Xlogger>::instance().log_trace(fmt, ##__VA_ARGS__)
+#define XLOGD(fmt, ...) Singleton<Xlogger>::instance().log_debug(fmt, ##__VA_ARGS__)
+#define XLOGI(fmt, ...) Singleton<Xlogger>::instance().log_info(fmt, ##__VA_ARGS__)
+#define XLOGW(fmt, ...) Singleton<Xlogger>::instance().log_warn(fmt, ##__VA_ARGS__)
+#define XLOGE(fmt, ...) Singleton<Xlogger>::instance().log_error(fmt, ##__VA_ARGS__)
+#define XLOGC(fmt, ...) Singleton<Xlogger>::instance().log_critical(fmt, ##__VA_ARGS__)
 
 class Xlogger
 {

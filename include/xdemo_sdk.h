@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-14 14:00:33
+ * @LastEditTime: 2025-06-14 16:33:55
  * @Description: SDK 的 C++ 语言接口头文件
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -26,10 +26,11 @@ public:
     ~XDemoSDK();
 
 public:
-    ResCode init(DataSource data_source, const LogConfig &log_config);
-    ResCode deinit();
+    ResCode init(DataSource data_source, const std::string &config_path);
     ResCode set_output_callback(const OutputCallback &output_callback);
-    ResCode input_data(const void *input);
+    ResCode input_data1(const void *input1);
+    ResCode input_data2(const void *input2);
+    ResCode deinit();
 
 private:
     class XDemoSDKImpl;

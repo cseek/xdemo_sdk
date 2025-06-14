@@ -15,6 +15,7 @@ add_subdirectory(src)
 add_subdirectory(example)
 add_subdirectory(deps/doctest)
 add_subdirectory(deps/spdlog)
+add_subdirectory(deps/json)
 add_subdirectory(test)
 
 # 打包库
