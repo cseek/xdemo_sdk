@@ -2,12 +2,12 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-06-01 22:08:19
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-01 22:30:24
+ * @LastEditTime: 2025-06-14 13:46:56
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
+#include "utils/thread.h"
 #include "doctest.h"
-#include "thread.h"
 #include <iostream> // for std::thread::id comparison
 
 TEST_SUITE("test_thread")

@@ -2,14 +2,13 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-24 14:06:11
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-05-24 14:19:53
+ * @LastEditTime: 2025-06-14 13:46:04
  * @Description: 
  * Copyright (c) 2025 by Aurson, All Rights Reserved. 
  */
+#include "utils/singleton.h"
 #include "doctest.h"
-#include "singleton.h"
 #include <thread>
-#include <string>
 
 TEST_SUITE("test_singleton")
 {

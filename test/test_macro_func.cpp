@@ -2,12 +2,12 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-06-02 00:08:18
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-02 00:28:24
+ * @LastEditTime: 2025-06-14 13:44:31
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
+#include "utils/macro_func.h"
 #include "doctest.h"
-#include "macro_func.h"
 #include <iostream>
 
 static void count()

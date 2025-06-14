@@ -2,12 +2,12 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-06-11 00:10:58
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-11 00:27:26
+ * @LastEditTime: 2025-06-14 13:43:20
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
+#include "utils/cpu_usage.h"
 #include "doctest.h"
-#include "cpu_usage.h"
 #include <thread>
 
 TEST_SUITE("test_cpu_usage")

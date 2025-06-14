@@ -2,14 +2,14 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-24 14:37:10
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-11 23:11:48
+ * @LastEditTime: 2025-06-14 13:48:17
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #ifndef __XLOGGER_H__
 #define __XLOGGER_H__
 
-#include "singleton.h"
+#include "utils/singleton.h"
 #include "spdlog/async.h"
 #include "spdlog/fmt/bin_to_hex.h"
 #include "spdlog/sinks/basic_file_sink.h"

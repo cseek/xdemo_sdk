@@ -2,13 +2,13 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-29 15:37:02
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-04 18:10:17
+ * @LastEditTime: 2025-06-14 13:47:46
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #include "xdemo_sdkc.h"
 #include "xdemo_sdk.h"
-#include "singleton.h"
+#include "utils/singleton.h"
 
 XDEMO_SDK_API ResCode init(DataSource data_source, const LogConfig *log_config)
 {

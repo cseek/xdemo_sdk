@@ -2,12 +2,11 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-04 18:18:39
+ * @LastEditTime: 2025-06-14 13:48:02
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #include "xdemo_sdk.h"
-#include "singleton.h"
 #include "xlogger.h"
 
 class XDemoSDK::XDemoSDKImpl

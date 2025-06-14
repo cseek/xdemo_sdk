@@ -2,12 +2,12 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-06-01 22:30:55
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-02 11:09:52
+ * @LastEditTime: 2025-06-14 13:43:08
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
+#include "utils/cmd.h"
 #include "doctest.h"
-#include "cmd.h"
 
 TEST_SUITE("test_cmd")
 {

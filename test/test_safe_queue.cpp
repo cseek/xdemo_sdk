@@ -2,12 +2,12 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-24 12:48:10
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-01 23:19:53
+ * @LastEditTime: 2025-06-14 13:45:35
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
+#include "utils/safe_queue.h"
 #include "doctest.h"
-#include "safe_queue.h"
 #include <thread>
 
 TEST_SUITE("test_safe_queue")

@@ -2,14 +2,13 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-06-10 14:23:39
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-11 23:05:07
+ * @LastEditTime: 2025-06-14 13:48:39
  * @Description: 定时器类，基于 timerfd 实现，约 0.1 毫秒精度，start 后会马上先触发一次。
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
-#include "thread.h"
 #include <stdio.h>
 #include <sys/epoll.h>
 #include <sys/eventfd.h>
@@ -85,8 +84,9 @@ public:
         {
             if (!m_timer_name.empty())
             {
-                Thread::set_thread_name(m_timer_name);
+                (void)pthread_setname_np(pthread_self(), m_timer_name.c_str());
             }
+
             while (m_is_running)
             {
                 uint64_t expirations;

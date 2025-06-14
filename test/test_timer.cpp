@@ -2,12 +2,12 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-06-11 00:28:15
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-11 00:42:06
+ * @LastEditTime: 2025-06-14 13:47:07
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
+#include "utils/timer.h"
 #include "doctest.h"
-#include "timer.h"
 #include <string>
 
 TEST_SUITE("test_timer")
