@@ -2,13 +2,14 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-24 14:37:10
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-08 20:53:55
+ * @LastEditTime: 2025-06-11 23:11:48
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #ifndef __XLOGGER_H__
 #define __XLOGGER_H__
 
+#include "singleton.h"
 #include "spdlog/async.h"
 #include "spdlog/fmt/bin_to_hex.h"
 #include "spdlog/sinks/basic_file_sink.h"
@@ -16,6 +17,14 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/spdlog.h"
 #include <memory>
+
+#define XloggerInstance Singleton<Xlogger>::instance()
+#define XLOGT(fmt, ...) XloggerInstance.log_trace(fmt, ##__VA_ARGS__)
+#define XLOGD(fmt, ...) XloggerInstance.log_debug(fmt, ##__VA_ARGS__)
+#define XLOGI(fmt, ...) XloggerInstance.log_info(fmt, ##__VA_ARGS__)
+#define XLOGW(fmt, ...) XloggerInstance.log_warn(fmt, ##__VA_ARGS__)
+#define XLOGE(fmt, ...) XloggerInstance.log_error(fmt, ##__VA_ARGS__)
+#define XLOGC(fmt, ...) XloggerInstance.log_critical(fmt, ##__VA_ARGS__)
 
 class Xlogger
 {

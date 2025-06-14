@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-06-05 11:16:12
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-08 00:16:00
+ * @LastEditTime: 2025-06-11 23:04:23
  * @Description: 环形缓冲区，适用于高性能数据传输场景，支持多线程安全读写操作。但是数据太大的话，
  *               建议使用 safe_queue.h，因为环形缓冲区分配在栈上，栈空间有限，而本工程里的安全
  *               队列是分配在堆上。环形缓冲区设计必须强制容量为2的幂次，这是性能与正确性的关键保障。
@@ -36,9 +36,9 @@ class SafeRingBuffer
 
 public:
     SafeRingBuffer()
-        : m_head(0)
-        , m_tail(0)
-        , m_count(0)
+        : m_head(0),
+          m_tail(0),
+          m_count(0)
     {
     }
 

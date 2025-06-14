@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-06-10 14:23:39
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-11 00:40:49
+ * @LastEditTime: 2025-06-11 23:05:07
  * @Description: 定时器类，基于 timerfd 实现，约 0.1 毫秒精度，start 后会马上先触发一次。
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -27,7 +27,6 @@ class Timer
 {
 public:
     using TaskCallback = std::function<void(void)>;
-    // clang-format off
     /**
      * @description: 定时器构造函数
      * @param ms: 定时器间隔时间，单位毫秒
@@ -35,14 +34,13 @@ public:
      * @param timer_name: 定时器名称，用于调试和日志记录
      */
     Timer(uint64_t ms, const TaskCallback &callback, const std::string &timer_name = "")
-        : m_is_running(false)
-        , m_timer_fd(-1)
-        , m_interval_ms(ms)
-        , m_callback(callback)
-        , m_timer_name(timer_name)
+        : m_is_running(false),
+          m_timer_fd(-1),
+          m_interval_ms(ms),
+          m_callback(callback),
+          m_timer_name(timer_name)
     {
     }
-    // clang-format on
     Timer(const Timer &) = delete;
     Timer &operator=(const Timer &) = delete;
 

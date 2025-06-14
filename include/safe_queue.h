@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-24 12:17:47
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-05 11:20:15
+ * @LastEditTime: 2025-06-12 00:39:05
  * @Description: 线程安全的队列，数据存储在堆上，适合用于大数据量的场景，比如图像领域
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -22,20 +22,14 @@ class SafeQueue
 {
 public:
     explicit SafeQueue(uint32_t cap = 200)
-        : m_cap(cap)
-        , m_stop(false)
+        : m_cap(cap),
+          m_stop(false)
     {
     }
 
     ~SafeQueue()
     {
-        if (m_stop.load())
-        {
-            return;
-        }
-        m_stop.store(true);
-        m_cv.notify_all();
-        clear();
+        stop();
     }
 
     /**
@@ -78,7 +72,7 @@ public:
      * @description: 使用while循环等待队列不为空防止虚假唤醒（spurious wakeup）
      *               当多个线程等待在条件变量上时, 一个线程被唤醒后可能发现队列为空，
      *               所以需要循环检查队列是否为空, 如果队列为空，pop会阻塞当前线程，直到有数据可用或者stop被调用
-     * @return {bool} true: pop成功，false: pop失败
+     * @return {bool} true: pop成功，false: 停止pop
      */
     bool pop(T &value)
     {
@@ -95,6 +89,20 @@ public:
         value = std::move(m_queue.front());
         m_queue.pop();
         return true;
+    }
+    /**
+     * @description: 停止队列的操作
+     * @return {void}
+     */
+    void stop()
+    {
+        if (m_stop.load())
+        {
+            return;
+        }
+        m_stop.store(true);
+        m_cv.notify_all();
+        clear();
     }
 
     /**
