@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-20 15:01:24
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-08 21:11:32
+ * @LastEditTime: 2025-06-14 13:59:40
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -21,11 +21,6 @@ typedef enum
     INTERNAL = 0, // 内部数据源
     EXTERNAL = 1  // 外部数据源
 } DataSource;
-
-/* 输入的数据 */
-typedef struct
-{
-} Input;
 
 /* 输出的数据 */
 typedef struct

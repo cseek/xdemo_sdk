@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-29 13:30:15
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-04 18:09:52
+ * @LastEditTime: 2025-06-14 13:59:49
  * @Description: sdk 的 C 语言接口头文件
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -42,7 +42,7 @@ extern "C"
      * @param {Input} *input
      * @return {ResCode} 返回码
      */    
-    XDEMO_SDK_API ResCode input_data(const Input *input);
+    XDEMO_SDK_API ResCode input_data(const void *input);
 
 #ifdef __cplusplus
 }

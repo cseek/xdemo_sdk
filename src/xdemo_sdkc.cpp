@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-05-29 15:37:02
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-14 13:47:46
+ * @LastEditTime: 2025-06-14 14:05:24
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -36,11 +36,11 @@ XDEMO_SDK_API ResCode set_output_callback(const OutputCallback *output_callback)
     // clang-format on
 }
 
-XDEMO_SDK_API ResCode input_data(const Input *input)
+XDEMO_SDK_API ResCode input_data(const void *input)
 {
     if (nullptr == input)
     {
         return ERROR_INVALID_INPUT;
     }
-    return Singleton<XDemoSDK>::instance().input_data(*input);
+    return Singleton<XDemoSDK>::instance().input_data(input);
 }
