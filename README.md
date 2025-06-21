@@ -124,7 +124,7 @@ make test # ls ./test
 ```bash
 ../tool/cppcheck_report.sh
 ```
-![](doc/cppcheck_report.png)
+![](.imgs/cppcheck_report.png)
 
 ## 单元测试
 本项目采用 doctest 实现单元测试；doctest 是一个超轻量级的单元测试框架；可以实现多个测试套件（测试用例集），一个测试套件可以包含多个用例，测试时可以灵活控制要测试哪些用例或者哪些套件。
@@ -134,7 +134,7 @@ make test # ls ./test
 ```bash
 ../tool/test_report.sh # 一键测试并生成报告
 ```
-![](doc/test_report.png)
+![](.imgs/test_report.png)
 
 ### 手动测试
 
@@ -146,6 +146,12 @@ make test # ls ./test
 ./test/test_xdemo_sdk -ltc      # 复制列出来的测试用例，粘贴代替 xxx 即可测试某个用例
 ./test/test_xdemo_sdk           # 测试所有用例
 ```
+
+![](.imgs/test_suite.png)
+![](.imgs/test_case.png)
+![](.imgs/test_suite.png)
+![](.imgs/test_case.png)
+
 
 ## 完成情况
 
