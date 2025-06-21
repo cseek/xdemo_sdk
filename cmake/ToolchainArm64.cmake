@@ -1,0 +1,20 @@
+# 设置目标系统类型
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
+# 设置 C/C++ 编译器
+set(CMAKE_CXX_STANDARD 17)
+set(TOOLCHAIN_PREFIX aarch64-linux-gnu)
+set(CMAKE_C_COMPILER ${TOOLCHAIN_PREFIX}-gcc)
+set(CMAKE_CXX_COMPILER ${TOOLCHAIN_PREFIX}-g++)
+set(CMAKE_LINKER ${TOOLCHAIN_PREFIX}-ld)
+# 设置编译/链接标志
+set(ARCH_FLAGS "-march=armv8-a")
+set(FLOAT_ABI "-mfloat-abi=hard") # 函数调用时，浮点参数直接通过浮点寄存器传递 (FPU)
+set(OTHER_FLAGS "-fPIC")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${ARCH_FLAGS} ${FLOAT_ABI} ${OTHER_FLAGS}" CACHE STRING "C flags")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ARCH_FLAGS} ${FLOAT_ABI} ${OTHER_FLAGS}" CACHE STRING "C++ flags")
+# 只在 sysroot 中查找库和头文件
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)    # 主机程序
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)     # 目标库
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)     # 目标头文件
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)     # 目标包配置
