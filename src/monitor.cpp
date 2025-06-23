@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-06-17 00:11:08
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2024-06-20 01:27:10
+ * @LastEditTime: 2025-06-22 16:51:44
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -11,7 +11,7 @@
 #include "common.h"
 #include "xlogger.h"
 
-void Monitor::start()
+void Monitor::init()
 {
     m_timer = std::make_unique<Timer>(1000, [&]()
     {
@@ -33,7 +33,7 @@ void Monitor::start()
     m_timer->start();
 }
 
-void Monitor::stop()
+void Monitor::deinit()
 {
     m_timer->stop();
 }

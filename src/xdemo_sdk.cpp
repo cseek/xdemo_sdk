@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2024-06-20 00:45:52
+ * @LastEditTime: 2025-06-24 00:03:52
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -51,13 +51,13 @@ public:
             return ResCode::ERROR_SUBSCRIBE;
         }
         m_navigator.init();
-        m_monitor.start();
+        m_monitor.init();
         return ResCode::SUCCESS;
     }
 
     ResCode deinit()
     {
-        m_monitor.stop();
+        m_monitor.deinit();
         m_navigator.deinit();
         return ResCode::SUCCESS;
     }

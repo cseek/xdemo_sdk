@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-06-17 00:06:16
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2024-06-20 01:16:17
+ * @LastEditTime: 2025-06-22 16:51:59
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -23,8 +23,8 @@ public:
     ~Monitor() = default;
 
 public:
-    void start();
-    void stop();
+    void init();
+    void deinit();
 
 private:
     int m_gnss_fps = 0;
