@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-06-16 22:59:03
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2024-06-16 23:51:58
+ * @LastEditTime: 2025-06-24 21:28:40
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -20,6 +20,8 @@ class Navigator
 public:
     bool init();
     void deinit();
+
+private:
     void process();
 
 private:

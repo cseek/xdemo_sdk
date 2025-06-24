@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-24 11:27:25
+ * @LastEditTime: 2025-06-24 21:26:53
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -11,7 +11,7 @@
 #include "navigator.h"
 #include "config.h"
 #include "topic.h"
-#include "logger/xlogger.h"
+#include "xlogger.h"
 #include "broker/publisher.h"
 #include "broker/subscriber.h"
 #include "utils/singleton.h"
@@ -35,12 +35,13 @@ public:
             return res;
         }
         // 创建日志
+        std::string tag("xdemo-sdk");
         int rotation = config_instance.log_rotate();
         int file_size = config_instance.log_size();
         auto level = static_cast<spdlog::level::level_enum>(config_instance.log_level());
-        std::string file_name(config_instance.log_path() + "/" + get_time_str() + "/xdemo-sdk.log");
+        auto file_name = spdlog::fmt_lib::format("{}/{}/{}.log", config_instance.log_path(), get_time_str(), tag);
         auto &logger_instance = Singleton<Xlogger>::instance();
-        if (!logger_instance.init("xdemo-sdk", file_name, rotation, file_size, level))
+        if (!logger_instance.init(tag, file_name, rotation, file_size, level))
         {
             XLOGC("Failed to create logger");
             return ResCode::ERROR_CREATE_LOGGER;

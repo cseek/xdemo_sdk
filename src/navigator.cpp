@@ -8,7 +8,7 @@
  */
 #include "navigator.h"
 #include "topic.h"
-#include "logger/xlogger.h"
+#include "xlogger.h"
 
 bool Navigator::init()
 {
