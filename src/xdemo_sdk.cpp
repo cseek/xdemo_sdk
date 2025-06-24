@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-24 00:03:52
+ * @LastEditTime: 2025-06-24 11:27:25
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -10,8 +10,8 @@
 #include "monitor.h"
 #include "navigator.h"
 #include "config.h"
-#include "xlogger.h"
 #include "topic.h"
+#include "logger/xlogger.h"
 #include "broker/publisher.h"
 #include "broker/subscriber.h"
 #include "utils/singleton.h"

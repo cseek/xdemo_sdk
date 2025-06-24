@@ -2,13 +2,13 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-06-16 23:00:56
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2024-06-20 01:34:18
+ * @LastEditTime: 2025-06-24 18:33:22
  * @Description: 
  * Copyright (c) 2025 by Aurson, All Rights Reserved. 
  */
 #include "navigator.h"
 #include "topic.h"
-#include "xlogger.h"
+#include "logger/xlogger.h"
 
 bool Navigator::init()
 {
@@ -48,13 +48,13 @@ void Navigator::process()
 
         if (m_gnss_buffer.pop(gnss_data) && m_imu_buffer.pop(imu_data) && m_wheel_buffer.pop(wheel_data))
         {
-            XLOGD("gnss_data: timestamp={}, latitude={}, longitude={}, altitude={}",
-                  gnss_data.timestamp, gnss_data.latitude, gnss_data.longitude, gnss_data.altitude);
-            XLOGD("imu_data: timestamp={}, acceleration_x={}, acceleration_y={}, acceleration_z={}",
+            XLOGI("gnss_data: frame_id={}, timestamp={}, lat={}, lon={}, alt={}, speed={}, heading={}",
+                  gnss_data.frame_id, gnss_data.timestamp, gnss_data.lat, gnss_data.lon, gnss_data.alt, gnss_data.speed, gnss_data.heading);
+            XLOGI("imu_data: timestamp={}, acceleration_x={}, acceleration_y={}, acceleration_z={}",
                   imu_data.timestamp, imu_data.acceleration_x, imu_data.acceleration_y, imu_data.acceleration_z);
-            XLOGD("wheel_data: timestamp={}, front_left_rpm={}, front_right_rpm={}, rear_left_rpm={}, rear_right_rpm={}",
-                  wheel_data.timestamp, wheel_data.front_left_rpm, wheel_data.front_right_rpm,
-                  wheel_data.rear_left_rpm, wheel_data.rear_right_rpm);
+            XLOGI("wheel_data: frame_id={}, timestamp={}, front_left={}, front_right={}, rear_left={}, rear_right={}",
+                  wheel_data.frame_id, wheel_data.timestamp, wheel_data.front_left, wheel_data.front_right,
+                  wheel_data.rear_left, wheel_data.rear_right);
 
             FusionData fusion_data;
             fusion_data.timestamp = gnss_data.timestamp; // 假设时间戳一致
