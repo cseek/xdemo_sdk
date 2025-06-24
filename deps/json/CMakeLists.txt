@@ -2,7 +2,6 @@ project(json)
 
 add_library(
     ${PROJECT_NAME} INTERFACE
-    ${${PROJECT_NAME}_SRCS}
 )
 add_library(
     deps::${PROJECT_NAME} ALIAS
