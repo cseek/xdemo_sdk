@@ -2,14 +2,13 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-25 12:33:06
+ * @LastEditTime: 2025-06-25 22:18:36
  * @Description: SDK 的 C++ 语言接口头文件
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #ifndef __XDEMO_SDK_H__
 #define __XDEMO_SDK_H__
 
-#include "export.h"
 #include "common.h"
 #include <memory>
 #include <string>

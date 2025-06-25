@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-20 15:01:24
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-25 12:32:31
+ * @LastEditTime: 2025-06-25 22:19:06
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -10,6 +10,12 @@
 #define __COMMON_H__
 
 #include <stdint.h>
+
+#if defined(XDEMO_SDK_SHARED)
+#define XDEMO_SDK_API __attribute__((visibility("default")))
+#else
+#define XDEMO_SDK_API
+#endif
 
 /* 返回码 */
 enum class ResCode : uint16_t

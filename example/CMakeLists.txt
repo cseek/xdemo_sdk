@@ -4,7 +4,3 @@ target_link_libraries(
     ${EXE_CPP} PRIVATE 
     ${PROJECT_NAME}_static
 )
-# target_include_directories(
-#     ${EXE_CPP} PRIVATE
-#     ${CMAKE_SOURCE_DIR}/include
-# )

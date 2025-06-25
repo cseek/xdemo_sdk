@@ -25,11 +25,11 @@ target_link_libraries(
 # 添加头文件包含路径
 target_include_directories(
     ${PROJECT_NAME}_static PUBLIC 
-    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 target_include_directories(
     ${PROJECT_NAME}_shared PRIVATE 
-    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 # 设置输出名称
 set_target_properties(
@@ -73,14 +73,14 @@ install(
     RUNTIME DESTINATION ${PROJECT_NAME}/bin
 )
 install(
-    FILES ${CMAKE_SOURCE_DIR}/include/xdemo_sdk.h
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/xdemo_sdk.h
     DESTINATION ${PROJECT_NAME}/include
 )
 install(
-    FILES ${CMAKE_SOURCE_DIR}/include/common.h
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/common.h
     DESTINATION ${PROJECT_NAME}/include
 )
 install(
-    FILES ${CMAKE_SOURCE_DIR}/example/main.cpp
+    FILES ${TOP}/example/main.cpp
     DESTINATION ${PROJECT_NAME}/example
 )

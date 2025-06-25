@@ -16,7 +16,3 @@ target_link_libraries(
     deps::doctest
     deps::spdlog
 )
-target_include_directories(
-    test_${PROJECT_NAME} PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
