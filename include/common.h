@@ -2,18 +2,12 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-20 15:01:24
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-22 16:50:23
+ * @LastEditTime: 2025-06-25 12:32:31
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #ifndef __COMMON_H__
 #define __COMMON_H__
-
-#if defined(XDEMO_SDK_SHARED)
-#define XDEMO_SDK_API __attribute__((visibility("default")))
-#else
-#define XDEMO_SDK_API
-#endif
 
 #include <stdint.h>
 
@@ -48,18 +42,18 @@ struct GnssData
 
 typedef struct
 {
-    uint64_t frame_id;     // 帧ID
-    uint64_t timestamp;    // 时间戳（ms）
-    double gyro_x;         // X轴角速度 (rad/s)
-    double gyro_y;         // Y轴角速度
-    double gyro_z;         // Z轴角速度
-    double acceleration_x; // X轴加速度 (m/s²)
-    double acceleration_y; // Y轴加速度
-    double acceleration_z; // Z轴加速度
-    double magnetometer_x; // X轴磁场强度(uT)
-    double magnetometer_y; // Y轴磁场强度
-    double magnetometer_z; // Z轴磁场强度
-    double temperature;    // 温度 (°C)
+    uint64_t frame_id;  // 帧ID
+    uint64_t timestamp; // 时间戳（ms）
+    double gyro_x;      // X轴角速度 (rad/s)
+    double gyro_y;      // Y轴角速度
+    double gyro_z;      // Z轴角速度
+    double acc_x;       // X轴加速度 (m/s²)
+    double acc_y;       // Y轴加速度
+    double acc_z;       // Z轴加速度
+    double mag_x;       // X轴磁场强度(uT)
+    double mag_y;       // Y轴磁场强度
+    double mag_z;       // Z轴磁场强度
+    double temperature; // 温度 (°C)
 } ImuData;
 
 struct WheelData
