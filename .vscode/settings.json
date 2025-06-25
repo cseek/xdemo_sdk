@@ -70,6 +70,12 @@
         "typeinfo": "cpp",
         "variant": "cpp",
         "xdemo_sdkc.h": "c",
-        "dense": "cpp"
+        "dense": "cpp",
+        "any": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "ranges": "cpp",
+        "shared_mutex": "cpp",
+        "valarray": "cpp"
     }
 }
