@@ -2,8 +2,8 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-06-25 23:30:09
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-25 23:46:04
- * @Description:
+ * @LastEditTime: 2025-06-26 00:27:43
+ * @Description: 对于 CSVReader, 即使空格的数量不一致，也不会影响分割
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #ifndef __XCSV_H__
@@ -46,11 +46,17 @@ private:
     {
         std::vector<std::string> tokens;
         std::string token;
-        std::istringstream tokenStream(line);
+        std::istringstream token_stream(line);
 
-        while (std::getline(tokenStream, token, m_delimiter))
+        while (std::getline(token_stream, token, m_delimiter))
         {
-            tokens.push_back(token);
+            token.erase(0, token.find_first_not_of(" \t"));
+            token.erase(token.find_last_not_of(" \t") + 1);
+
+            if (!token.empty())
+            {
+                tokens.push_back(token);
+            }
         }
 
         return tokens;
