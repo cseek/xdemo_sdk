@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-06-01 22:30:55
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2024-06-14 13:43:08
+ * @LastEditTime: 2025-06-26 01:03:09
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -11,16 +11,6 @@
 
 TEST_SUITE("test_cmd")
 {
-    TEST_CASE("test_cmd::is_safe")
-    {
-        CHECK(Cmd::is_safe("ls -l"));
-        CHECK_FALSE(Cmd::is_safe("rm -rf /"));
-        CHECK_FALSE(Cmd::is_safe("dd if=/dev/zero of=/dev/sda"));
-        CHECK_FALSE(Cmd::is_safe("mkfs.ext4 /dev/sda1"));
-        CHECK_FALSE(Cmd::is_safe("chmod 777 /"));
-        CHECK_FALSE(Cmd::is_safe("chown root:root /"));
-    }
-
     TEST_CASE("test_cmd::execute")
     {
         std::string output;

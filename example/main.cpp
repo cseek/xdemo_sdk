@@ -2,12 +2,13 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-23 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-25 12:50:27
+ * @LastEditTime: 2025-06-26 01:02:02
  * @Description: 这是一个 SDK 的使用示例
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #include "xdemo_sdk.h"
 #include "utils/timer.h"
+#include "utils/xcsv.h"
 #include <signal.h>
 #include <string>
 #include <iostream>
@@ -35,9 +36,16 @@ int main()
             // std::cout << "Output received" << std::endl;
         }
     );
-    GnssData gnss_data = {1, 0, 39.9042, 116.4074, 10.0, 5.0, 90.0, 1.0, 8};
-    ImuData imu_data = {1, 0, 0.1, 0.2, 9.81, 0.01, 0.02, 0.03, 30.0};
-    WheelData wheel_data = {1, 0, 1.0};
+
+    GnssData gnss_data;
+    ImuData imu_data ;
+    WheelData wheel_data;
+    CsvData csv_imu;
+    CsvData csv_gnss;
+    CsvReader read_imu("./dataset/input/ADIS16465.csv", ' ');
+    CsvReader read_gnss("./dataset/input/GNSS_RTK.csv", ' ');
+    read_imu.read_all(csv_imu);
+    read_gnss.read_all(csv_gnss);
 
     Timer timer(5, [&] {
         sdk.input_gnss_data(gnss_data);
