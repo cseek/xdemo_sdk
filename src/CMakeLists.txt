@@ -24,7 +24,7 @@ target_link_libraries(
 )
 # 添加头文件包含路径
 target_include_directories(
-    ${PROJECT_NAME}_static PRIVATE 
+    ${PROJECT_NAME}_static PUBLIC 
     ${CMAKE_SOURCE_DIR}/include
 )
 target_include_directories(

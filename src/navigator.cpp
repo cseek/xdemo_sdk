@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-06-16 23:00:56
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-24 18:33:22
+ * @LastEditTime: 2025-06-25 12:46:50
  * @Description: 
  * Copyright (c) 2025 by Aurson, All Rights Reserved. 
  */
@@ -50,8 +50,8 @@ void Navigator::process()
         {
             XLOGI("gnss_data: frame_id={}, timestamp={}, lat={}, lon={}, alt={}, speed={}, heading={}",
                   gnss_data.frame_id, gnss_data.timestamp, gnss_data.lat, gnss_data.lon, gnss_data.alt, gnss_data.speed, gnss_data.heading);
-            XLOGI("imu_data: timestamp={}, acceleration_x={}, acceleration_y={}, acceleration_z={}",
-                  imu_data.timestamp, imu_data.acceleration_x, imu_data.acceleration_y, imu_data.acceleration_z);
+            XLOGI("imu_data: timestamp={}, acc_x={}, acc_y={}, acc_z={}",
+                  imu_data.timestamp, imu_data.acc_x, imu_data.acc_y, imu_data.acc_z);
             XLOGI("wheel_data: frame_id={}, timestamp={}, front_left={}, front_right={}, rear_left={}, rear_right={}",
                   wheel_data.frame_id, wheel_data.timestamp, wheel_data.front_left, wheel_data.front_right,
                   wheel_data.rear_left, wheel_data.rear_right);
