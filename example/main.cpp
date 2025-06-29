@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-23 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-26 01:02:02
+ * @LastEditTime: 2025-06-26 01:50:35
  * @Description: 这是一个 SDK 的使用示例
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -40,14 +40,21 @@ int main()
     GnssData gnss_data;
     ImuData imu_data ;
     WheelData wheel_data;
-    CsvData csv_imu;
-    CsvData csv_gnss;
+    CsvRow csv_imu;
+    CsvRow csv_gnss;
     CsvReader read_imu("./dataset/input/ADIS16465.csv", ' ');
     CsvReader read_gnss("./dataset/input/GNSS_RTK.csv", ' ');
-    read_imu.read_all(csv_imu);
-    read_gnss.read_all(csv_gnss);
+    read_imu.read_row(csv_imu);
+    read_gnss.read_row(csv_gnss);
 
     Timer timer(5, [&] {
+        csv_imu.clear();
+        csv_gnss.clear();
+        read_imu.read_row(csv_imu);
+        read_gnss.read_row(csv_gnss);
+        // TODO： string to number
+        // 这里面的所有逻辑放到回归测试里去做
+        // 这里只作为一个demo而以
         sdk.input_gnss_data(gnss_data);
         sdk.input_imu_data(imu_data);
         sdk.input_wheel_data(wheel_data);
@@ -60,6 +67,8 @@ int main()
     }
 
     timer.stop();
+    read_imu.close();
+    read_gnss.close();
     sdk.deinit();
 
     return 0;
