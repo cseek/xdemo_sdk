@@ -23,7 +23,7 @@ if not file_paths:
 # 存储数据和文件名
 trajectories = []
 colors = ['blue', 'red', 'green', 'purple', 'orange']  # 不同轨迹的颜色
-labels = ['INS', 'GNSS', 'Trajectory 3', 'Trajectory 4', 'Trajectory 5']  # 图例标签
+labels = ['GNSS', 'INS', 'Trajectory 3', 'Trajectory 4', 'Trajectory 5']  # 图例标签
 
 # 读取所有选择的文件
 for i, file_path in enumerate(file_paths):
