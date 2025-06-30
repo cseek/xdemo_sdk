@@ -1,4 +1,4 @@
-sec_week(s) lat(deg) lon(deg) geo_height(m) lat_std(m) lon_std(m)  geo_height_std(m)
+sec_week(s) lat(deg) lon(deg) alt(m) lat_std(m) lon_std(m)  alt_std(m)
 357473.000    30.4604325443   114.4725046685     23.000    0.008    0.011    0.036 
 357474.000    30.4604325969   114.4725044382     22.981    0.008    0.011    0.036 
 357475.000    30.4604328642   114.4725014417     23.018    0.008    0.011    0.036 

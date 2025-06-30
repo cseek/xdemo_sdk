@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-24 21:26:53
+ * @LastEditTime: 2025-06-30 21:58:17
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -81,12 +81,6 @@ public:
         return ResCode::SUCCESS;
     }
 
-    ResCode input_wheel_data(const WheelData &wheel_data)
-    {
-        m_publisher.publish<WheelData>(WHEEL_TOPIC, wheel_data);
-        return ResCode::SUCCESS;
-    }
-
     void OutputFusionData(const FusionData &fusion_data)
     {
         if (m_fusion_data_callback)
@@ -153,15 +147,6 @@ ResCode XDemoSDK::input_imu_data(const ImuData &imu_data)
     if (m_impl)
     {
         return m_impl->input_imu_data(imu_data);
-    }
-    return ResCode::ERROR_NOT_INITIALIZED;
-}
-
-ResCode XDemoSDK::input_wheel_data(const WheelData &wheel_data)
-{
-    if (m_impl)
-    {
-        return m_impl->input_wheel_data(wheel_data);
     }
     return ResCode::ERROR_NOT_INITIALIZED;
 }

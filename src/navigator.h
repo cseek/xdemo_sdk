@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-06-16 22:59:03
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-24 21:28:40
+ * @LastEditTime: 2025-06-30 21:59:10
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -31,7 +31,6 @@ private:
     Subscriber m_subscriber;                      // 订阅者
     SafeRingBuffer<GnssData, 32> m_gnss_buffer;   // GNSS 数据缓冲区
     SafeRingBuffer<ImuData, 32> m_imu_buffer;     // IMU 数据缓冲区
-    SafeRingBuffer<WheelData, 32> m_wheel_buffer; // 轮速数据缓冲区
 };
 
 #endif // __NAVIGATOR_H__

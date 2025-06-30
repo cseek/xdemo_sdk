@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-06-17 00:06:16
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-22 16:51:59
+ * @LastEditTime: 2025-06-30 22:06:40
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -29,7 +29,6 @@ public:
 private:
     int m_gnss_fps = 0;
     int m_imu_fps = 0;
-    int m_wheel_fps = 0;
     CpuUsage m_cpu_usage;
     Subscriber m_subscriber;
     std::unique_ptr<Timer> m_timer;

@@ -11,7 +11,6 @@
 
 #define GNSS_TOPIC "/gnss"     // GNSS 数据主题
 #define IMU_TOPIC "/imu"       // IMU 数据主题
-#define WHEEL_TOPIC "/wheel"   // 轮速数据主题
 #define FUSION_TOPIC "/fusion" // 融合数据主题
 
 #endif // __TOPIC_H__

@@ -2,9 +2,9 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-06-16 23:00:56
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-25 12:46:50
- * @Description: 
- * Copyright (c) 2025 by Aurson, All Rights Reserved. 
+ * @LastEditTime: 2025-06-30 23:37:54
+ * @Description:
+ * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #include "navigator.h"
 #include "topic.h"
@@ -16,8 +16,6 @@ bool Navigator::init()
                                      { m_gnss_buffer.push(gnss_data); });
     m_subscriber.subscribe<ImuData>(IMU_TOPIC, [&](const ImuData &imu_data)
                                     { m_imu_buffer.push(imu_data); });
-    m_subscriber.subscribe<WheelData>(WHEEL_TOPIC, [&](const WheelData &wheel_data)
-                                      { m_wheel_buffer.push(wheel_data); });
     m_thread = std::thread(&Navigator::process, this);
     return true;
 }
@@ -27,10 +25,8 @@ void Navigator::deinit()
     m_runging = false;
     m_subscriber.unsubscribe<GnssData>(GNSS_TOPIC);
     m_subscriber.unsubscribe<ImuData>(IMU_TOPIC);
-    m_subscriber.unsubscribe<WheelData>(WHEEL_TOPIC);
     m_gnss_buffer.stop();
     m_imu_buffer.stop();
-    m_wheel_buffer.stop();
     if (m_thread.joinable())
     {
         m_thread.join();
@@ -44,28 +40,35 @@ void Navigator::process()
     {
         GnssData gnss_data;
         ImuData imu_data;
-        WheelData wheel_data;
 
-        if (m_gnss_buffer.pop(gnss_data) && m_imu_buffer.pop(imu_data) && m_wheel_buffer.pop(wheel_data))
+        if (m_imu_buffer.try_pop(imu_data))
         {
-            XLOGI("gnss_data: frame_id={}, timestamp={}, lat={}, lon={}, alt={}, speed={}, heading={}",
-                  gnss_data.frame_id, gnss_data.timestamp, gnss_data.lat, gnss_data.lon, gnss_data.alt, gnss_data.speed, gnss_data.heading);
-            XLOGI("imu_data: timestamp={}, acc_x={}, acc_y={}, acc_z={}",
-                  imu_data.timestamp, imu_data.acc_x, imu_data.acc_y, imu_data.acc_z);
-            XLOGI("wheel_data: frame_id={}, timestamp={}, front_left={}, front_right={}, rear_left={}, rear_right={}",
-                  wheel_data.frame_id, wheel_data.timestamp, wheel_data.front_left, wheel_data.front_right,
-                  wheel_data.rear_left, wheel_data.rear_right);
+            XLOGI("[ imu_data] frame_id: {}", imu_data.frame_id);
+            XLOGI("[ imu_data] sec_week: {}", imu_data.sec_week);
+            XLOGI("[ imu_data] gyro_x  : {}", imu_data.gyro_x);
+            XLOGI("[ imu_data] gyro_y  : {}", imu_data.gyro_y);
+            XLOGI("[ imu_data] gyro_z  : {}", imu_data.gyro_z);
+            XLOGI("[ imu_data] acc_x   : {}", imu_data.acc_x);
+            XLOGI("[ imu_data] acc_y   : {}", imu_data.acc_y);
+            XLOGI("[ imu_data] acc_z   : {}", imu_data.acc_z);
 
             FusionData fusion_data;
-            fusion_data.timestamp = gnss_data.timestamp; // 假设时间戳一致
+            fusion_data.sec_week = gnss_data.sec_week; // 假设时间戳一致
             // 进行数据融合处理
             // ...
-
             m_publisher.publish<FusionData>(FUSION_TOPIC, fusion_data);
         }
-        else
+        if (m_gnss_buffer.try_pop(gnss_data))
         {
-            std::this_thread::yield();
+            XLOGI("[gnss_data] frame_id: {}", gnss_data.frame_id);
+            XLOGI("[gnss_data] sec_week: {}", gnss_data.sec_week);
+            XLOGI("[gnss_data] lat     : {}", gnss_data.lat);
+            XLOGI("[gnss_data] lon     : {}", gnss_data.lon);
+            XLOGI("[gnss_data] alt     : {}", gnss_data.alt);
+            XLOGI("[gnss_data] lat_std : {}", gnss_data.lat_std);
+            XLOGI("[gnss_data] lon_std : {}", gnss_data.lon_std);
+            XLOGI("[gnss_data] alt_std : {}", gnss_data.alt_std);
         }
+        std::this_thread::yield();
     }
 }

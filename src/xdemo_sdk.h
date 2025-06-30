@@ -31,7 +31,6 @@ public:
     ResCode set_fusion_data_callback(const FusionDataCallback &output_callback);
     ResCode input_gnss_data(const GnssData &gnss_data);
     ResCode input_imu_data(const ImuData &imu_data);
-    ResCode input_wheel_data(const WheelData &wheel_data);
 
 private:
     class XDemoSDKImpl;

@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2025-06-25 23:30:09
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-26 01:31:46
+ * @LastEditTime: 2025-06-30 23:00:37
  * @Description: 对于 CSVReader, 即使空格的数量不一致，也不会影响分割
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -50,7 +50,11 @@ public:
         }
 
         std::string line;
-        std::getline(m_ifs, line);
+        if (!std::getline(m_ifs, line))
+        {
+            return false;
+        }
+
         data = parse_line(line);
 
         return true;

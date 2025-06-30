@@ -17,7 +17,8 @@ add_subdirectory(deps/doctest)
 add_subdirectory(deps/spdlog)
 add_subdirectory(deps/json)
 add_subdirectory(deps/eigen)
-add_subdirectory(test)
+add_subdirectory(test/unit)
+add_subdirectory(test/integration)
 
 # 打包库
 add_custom_target(pack
@@ -34,8 +35,14 @@ add_custom_target(example
     COMMENT "Building example"
 )
 
-# 编译示例
-add_custom_target(test
-    DEPENDS test_${PROJECT_NAME}
+# 编译单元测试
+add_custom_target(unittest
+    DEPENDS unittest_${PROJECT_NAME}
     COMMENT "Building unit test"
+)
+
+# 编译集成测试
+add_custom_target(integration_test
+    DEPENDS integration_test_${PROJECT_NAME}
+    COMMENT "Building integration test"
 )

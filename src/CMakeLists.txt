@@ -11,7 +11,7 @@ add_library(
     ${SRCS}
 )
 target_link_libraries(
-    ${PROJECT_NAME}_static PRIVATE
+    ${PROJECT_NAME}_static PUBLIC
     deps::spdlog
     deps::json
     deps::eigen
