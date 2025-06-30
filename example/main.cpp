@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-23 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-30 22:09:23
+ * @LastEditTime: 2025-07-01 01:06:40
  * @Description: 这是一个 SDK 的使用示例
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -20,8 +20,17 @@ void signal_handler(int signum)
 int main()
 {
     signal(SIGINT, signal_handler);
+
     XDemoSDK sdk;
-    ResCode res = sdk.init("./config/xdemo.conf");
+    Config config;
+
+    config.enable_console_log = true;
+    config.log_level = 2;
+    config.log_size = 20 * 1024 * 1024;
+    config.log_rotation = 5;
+    config.log_fname = "./build/log/xdemo_sdk.log";
+
+    ResCode res = sdk.init(config);
     if (res != ResCode::SUCCESS)
     {
         return -1;
@@ -30,7 +39,8 @@ int main()
         [](const FusionData &fusion_data)
         {
             std::cout << "Output received" << std::endl;
-        });
+        }
+    );
 
     int filter = 0;
     GnssData gnss_data;

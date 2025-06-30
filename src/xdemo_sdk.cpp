@@ -2,14 +2,13 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-30 21:58:17
+ * @LastEditTime: 2025-07-01 01:11:10
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
 #include "xdemo_sdk.h"
 #include "monitor.h"
 #include "navigator.h"
-#include "config.h"
 #include "topic.h"
 #include "xlogger.h"
 #include "broker/publisher.h"
@@ -24,22 +23,14 @@ public:
     XDemoSDKImpl() = default;
     ~XDemoSDKImpl() = default;
 
-    ResCode init(const std::string &config_path)
+    ResCode init(const Config &config)
     {
-        // 加载配置
-        auto &config_instance = Singleton<Config>::instance();
-        ResCode res = config_instance.init(config_path);
-        if (ResCode::SUCCESS != res)
-        {
-            XLOGC("Failed to load config from path: {}", config_path);
-            return res;
-        }
-        // 创建日志
+        using namespace spdlog::level;
         std::string tag("xdemo-sdk");
-        int rotation = config_instance.log_rotate();
-        int file_size = config_instance.log_size();
-        auto level = static_cast<spdlog::level::level_enum>(config_instance.log_level());
-        auto file_name = spdlog::fmt_lib::format("{}/{}/{}.log", config_instance.log_path(), get_time_str(), tag);
+        int rotation = config.log_rotation;
+        int file_size = config.log_size;
+        auto level = static_cast<level_enum>(config.log_level);
+        auto &file_name = config.log_fname;
         auto &logger_instance = Singleton<Xlogger>::instance();
         if (!logger_instance.init(tag, file_name, rotation, file_size, level))
         {
@@ -53,6 +44,7 @@ public:
         }
         m_navigator.init();
         m_monitor.init();
+
         return ResCode::SUCCESS;
     }
 
@@ -106,11 +98,11 @@ XDemoSDK::~XDemoSDK()
 {
 }
 
-ResCode XDemoSDK::init(const std::string &config_path)
+ResCode XDemoSDK::init(const Config &config)
 {
     if (m_impl)
     {
-        return m_impl->init(config_path);
+        return m_impl->init(config);
     }
     return ResCode::ERROR_NOT_INITIALIZED;
 }

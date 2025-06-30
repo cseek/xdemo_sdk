@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-30 23:38:21
+ * @LastEditTime: 2025-07-01 01:11:50
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -25,7 +25,15 @@ int main()
 {
     signal(SIGINT, signal_handler);
     XDemoSDK sdk;
-    sdk.init("./config/xdemo.conf");
+    Config config;
+
+    config.enable_console_log = true;
+    config.log_level = 2;
+    config.log_size = 20 * 1024 * 1024;
+    config.log_rotation = 5;
+    config.log_fname = "./build/log/xdemo_sdk.log";
+
+    sdk.init(config);
     sdk.set_fusion_data_callback(
         [](const FusionData &fusion_data)
         {

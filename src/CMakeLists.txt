@@ -13,13 +13,11 @@ add_library(
 target_link_libraries(
     ${PROJECT_NAME}_static PUBLIC
     deps::spdlog
-    deps::json
     deps::eigen
 )
 target_link_libraries(
     ${PROJECT_NAME}_shared PRIVATE
     deps::spdlog
-    deps::json
     deps::eigen
 )
 # 添加头文件包含路径

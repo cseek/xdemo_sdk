@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-06-25 22:18:36
+ * @LastEditTime: 2025-07-01 01:07:55
  * @Description: SDK 的 C++ 语言接口头文件
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -26,7 +26,7 @@ public:
     ~XDemoSDK();
 
 public:
-    ResCode init(const std::string &config_path);
+    ResCode init(const Config &config);
     ResCode deinit();
     ResCode set_fusion_data_callback(const FusionDataCallback &output_callback);
     ResCode input_gnss_data(const GnssData &gnss_data);
