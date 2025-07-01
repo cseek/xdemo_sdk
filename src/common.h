@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-20 15:01:24
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-07-01 01:12:17
+ * @LastEditTime: 2025-07-01 12:38:02
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -34,43 +34,46 @@ enum class ResCode : uint16_t
     ERROR_INVALID_INPUT = 210,       // 无效输入
 };
 
+// GNSS定位数据
 struct GnssData
 {
-    uint64_t frame_id; // 帧ID
-    uint64_t sec_week; // 周内秒（s）
-    double lat;        // 纬度 (度)
-    double lon;        // 经度 (度)
-    double alt;        // 海拔高度 (m)
-    double lat_std;    // 纬度标准差 (m)
-    double lon_std;    // 经度标准差 (m)
-    double alt_std;    // 海拔标准差 (m)
+    uint64_t frame_id; // 帧ID (递增序号)
+    uint64_t sec_week; // GPS周内秒 [s]
+    double lat;        // 纬度 [°]
+    double lon;        // 经度 [°]
+    double alt;        // 海拔高度 [m]
+    double lat_std;    // 纬度标准差 [m]
+    double lon_std;    // 经度标准差 [m]
+    double alt_std;    // 海拔标准差 [m]
 };
 
+// IMU惯性测量数据
 struct ImuData
 {
-    uint64_t frame_id; // 帧ID
-    uint64_t sec_week; // 周内秒（s）
-    double gyro_x;     // X轴角速度 (rad/s)
-    double gyro_y;     // Y轴角速度
-    double gyro_z;     // Z轴角速度
-    double acc_x;      // X轴加速度 (m/s²)
-    double acc_y;      // Y轴加速度
-    double acc_z;      // Z轴加速度
+    uint64_t frame_id; // 帧ID (与GNSS同步)
+    uint64_t sec_week; // GPS周内秒 [s]
+    double gyro_x;     // X轴角速度 [rad/s]
+    double gyro_y;     // Y轴角速度 [rad/s]
+    double gyro_z;     // Z轴角速度 [rad/s]
+    double acc_x;      // X轴加速度 [m/s²]
+    double acc_y;      // Y轴加速度 [m/s²]
+    double acc_z;      // Z轴加速度 [m/s²]
 };
 
+// 融合后导航数据
 struct FusionData
 {
-    uint64_t frame_id;   // 帧ID
-    uint64_t sec_week;   // 周内秒（s）
-    double position_lat; // 纬度 (度)
-    double position_lon; // 经度 (度)
-    double position_alt; // 海拔高度 (m)
-    double velocity_n;   // 北速 (m/s)
-    double velocity_e;   // 东速 (m/s)
-    double velocity_d;   // 地度 (m/s)
-    double attitude_r;   // 横滚角 (度)
-    double attitude_p;   // 俯仰角 (度)
-    double attitude_y;   // 偏航角 (度)
+    uint64_t frame_id; // 帧ID (融合结果)
+    uint64_t sec_week; // GPS周内秒 [s]
+    double lat;        // 融合纬度 [°]
+    double lon;        // 融合经度 [°]
+    double alt;        // 融合海拔 [m]
+    double vel_n;      // 北向速度 [m/s]
+    double vel_e;      // 东向速度 [m/s]
+    double vel_d;      // 地向速度 [m/s]
+    double att_r;      // 横滚角 [°]
+    double att_p;      // 俯仰角 [°]
+    double att_y;      // 偏航角 [°]
 };
 
 struct Config
