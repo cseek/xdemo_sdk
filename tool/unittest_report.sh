@@ -3,14 +3,14 @@
  # @Author: aurson jassimxiong@gmail.com
  # @Date: 2024-05-30 23:50:38
  # @LastEditors: aurson jassimxiong@gmail.com
- # @LastEditTime: 2024-06-04 01:07:50
+ # @LastEditTime: 2025-07-01 12:30:57
  # @Description: 
  # Copyright (c) 2025 by Aurson, All Rights Reserved. 
 ### 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 project_dir=${script_dir}/..
 build_dir=${project_dir}/build
-test_exe="$build_dir/test/test_xdemo_sdk"
+test_exe="$build_dir/test/unittest_xdemo_sdk"
 report_xslt="$project_dir/xslt/test_report.xslt"
 report_xml="$build_dir/test_report.xml"
 report_html="$build_dir/test_report.html"
