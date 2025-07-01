@@ -2,7 +2,7 @@
  * @Author: aurson jassimxiong@gmail.com
  * @Date: 2024-05-19 23:23:35
  * @LastEditors: aurson jassimxiong@gmail.com
- * @LastEditTime: 2025-07-01 01:11:50
+ * @LastEditTime: 2025-07-01 23:50:37
  * @Description:
  * Copyright (c) 2025 by Aurson, All Rights Reserved.
  */
@@ -12,7 +12,6 @@
 #include "utils/xcsv.h"
 #include <signal.h>
 #include <string>
-#include <iostream>
 
 bool is_running = true;
 
@@ -34,13 +33,32 @@ int main()
     config.log_fname = "./build/log/xdemo_sdk.log";
 
     sdk.init(config);
-    sdk.set_fusion_data_callback(
-        [](const FusionData &fusion_data)
-        {
-            // std::cout << "Output received" << std::endl;
-        }
-    );
+    CsvWriter write_fusion("./dataset/csv/fusion.csv", ' ');
+    CsvRow row = {"frame_id", "sec_week", "lat(deg)", "lon(deg)", "alt", "vel_n", "vel_e", "vel_d", "att_r", "att_p", "att_y"};
 
+    write_fusion.write_row(row);
+    // clang-format off
+    sdk.set_fusion_data_callback(
+    [&](const FusionData &fusion_data)
+    {
+        row.clear();
+        row =
+        {
+            std::to_string(fusion_data.frame_id),
+            std::to_string(fusion_data.sec_week),
+            std::to_string(fusion_data.lat),
+            std::to_string(fusion_data.lon),
+            std::to_string(fusion_data.alt),
+            std::to_string(fusion_data.vel_n),
+            std::to_string(fusion_data.vel_e),
+            std::to_string(fusion_data.vel_d),
+            std::to_string(fusion_data.att_r),
+            std::to_string(fusion_data.att_p),
+            std::to_string(fusion_data.att_y)
+        };
+        write_fusion.write_row(row);
+    });
+    // clang-format on
     GnssData gnss_data;
     ImuData imu_data;
     CsvRow csv_imu;
@@ -55,7 +73,7 @@ int main()
     read_gnss.read_row(csv_gnss);
 
     Timer timer(5, [&]
-    {
+                {
         csv_imu.clear();
         csv_gnss.clear();
         if (read_imu.read_row(csv_imu)) // 200 HZ
@@ -86,8 +104,7 @@ int main()
                 gnss_data.alt_std = std::stod(csv_gnss[6]);
                 sdk.input_gnss_data(gnss_data);
             }
-        } 
-    }, "read_handler");
+        } }, "read_handler");
     timer.start();
 
     while (is_running)
